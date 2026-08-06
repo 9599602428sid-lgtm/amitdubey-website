@@ -122,3 +122,206 @@
         border-bottom: 1px solid #e2e8f0;
     }
 }
+
+/* ============================================================
+   EXECUTIVE ELITE: Fix invisible text & elements on light bg
+   ============================================================ */
+
+/* Hero badge — replace glowing cyan on light bg */
+.badge {
+    background: rgba(29, 78, 216, 0.08);
+    border: 1px solid rgba(29, 78, 216, 0.25);
+    color: var(--primary);
+    box-shadow: none;
+}
+.badge-dot {
+    box-shadow: none;
+}
+
+/* Hero lead text */
+.hero-lead {
+    color: var(--text-secondary);
+}
+
+/* Section headings & lead text */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+.section-lead {
+    color: var(--text-secondary);
+}
+
+/* Hero section text explicitly */
+.hero-content h1 {
+    color: var(--text-primary);
+}
+
+/* Stats section */
+.stats-section {
+    background: #f1f5f9;
+}
+.stat-icon {
+    color: var(--primary);
+}
+.stat-number,
+.stat-number-wrapper {
+    color: var(--text-primary);
+}
+.stat-label {
+    color: var(--text-secondary);
+}
+
+/* Tab text */
+.tab-title {
+    color: var(--text-primary);
+}
+.tab-text p,
+.tab-text ul li {
+    color: var(--text-secondary);
+}
+.benefit-list li strong {
+    color: var(--text-primary);
+}
+
+/* Visual label */
+.visual-label {
+    background: rgba(15, 23, 42, 0.75);
+    color: #f1f5f9;
+}
+
+/* Timeline */
+.timeline-date {
+    color: var(--primary);
+}
+.timeline-content h3 {
+    color: var(--text-primary);
+}
+.timeline-content p {
+    color: var(--text-secondary);
+}
+.timeline-marker {
+    background: var(--primary);
+    border-color: #e2e8f0;
+}
+.timeline::before {
+    background: #cbd5e1;
+}
+
+/* Gallery */
+.gallery-info h4 {
+    color: var(--text-primary);
+}
+.gallery-info p {
+    color: var(--text-secondary);
+}
+
+/* Media section — remove hardcoded dark gradient */
+.media-section {
+    background: #f8fafc;
+}
+.books-display h3,
+.media-channels h3 {
+    color: var(--text-primary);
+}
+.media-channels .media-intro {
+    color: var(--text-secondary);
+}
+.book-info h4 {
+    color: var(--text-primary);
+}
+.book-info p {
+    color: var(--text-secondary);
+}
+.channel-details h5 {
+    color: var(--text-primary);
+}
+.channel-details span {
+    color: var(--text-secondary);
+}
+.btn-link {
+    color: var(--primary);
+}
+
+/* Diagnostic Section — replace dark card backgrounds */
+.diagnostic-section {
+    background: #f1f5f9;
+}
+.diagnostic-wrapper {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+.diagnostic-info h2 {
+    color: var(--text-primary);
+}
+.diagnostic-info p {
+    color: var(--text-secondary);
+}
+.badge-partner {
+    background: rgba(29, 78, 216, 0.05);
+    border: 1px solid rgba(29, 78, 216, 0.15);
+    color: var(--text-secondary);
+}
+.badge-partner strong {
+    color: var(--primary);
+}
+
+/* Diagnostic widget inner box */
+.diagnostic-widget {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+.form-group label {
+    color: var(--text-secondary);
+}
+
+/* Select dropdown — override hardcoded dark bg */
+.diagnostic-select,
+select {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: var(--text-primary);
+}
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+}
+
+/* Radio buttons */
+.radio-label span {
+    color: var(--text-secondary);
+}
+.radio-label input[type="radio"] {
+    border: 2px solid #94a3b8;
+}
+
+/* Results panel */
+.results-header h3 {
+    color: var(--text-primary);
+}
+.risk-label {
+    color: var(--text-secondary);
+}
+.recommendation-block h5 {
+    color: var(--text-secondary);
+}
+.recommendation-block p {
+    color: var(--text-primary);
+}
+.disclaimer {
+    color: #64748b;
+}
+.loader-text {
+    color: var(--text-secondary);
+}
+
+/* Footer link colors */
+.footer-brand p {
+    color: #cbd5e1;
+}
+.footer-links h5 {
+    color: #94a3b8;
+}
+.ap-sub {
+    color: #94a3b8;
+}
