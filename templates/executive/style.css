@@ -170,6 +170,7 @@ p {
    ============================================================ */
 .benefits-section {
     background: #ffffff !important;
+    background-image: none !important;
 }
 .tab-btn {
     background: #e2e8f0 !important;
@@ -207,16 +208,24 @@ p {
     color: #0d9488 !important;
 }
 
-/* Visual cards inside tab panels */
+/* Visual cards inside tab panels — keep dark panel, force light label text */
 .visual-card {
     background: #1e293b !important;
     border: 1px solid #cbd5e1 !important;
     box-shadow: none !important;
 }
 .visual-label {
-    background: rgba(15, 23, 42, 0.85) !important;
-    color: #f1f5f9 !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
+    background: rgba(15, 23, 42, 0.9) !important;
+    color: #f8fafc !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.profile-badge {
+    background: rgba(15, 23, 42, 0.9) !important;
+    color: #93c5fd !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.gallery-overlay span {
+    color: #93c5fd !important;
 }
 
 /* ============================================================
@@ -251,6 +260,7 @@ p {
    ============================================================ */
 .gallery-section {
     background: #f1f5f9 !important;
+    background-image: none !important;
 }
 .gallery-info h4 {
     color: #0f172a !important;
@@ -264,6 +274,7 @@ p {
    ============================================================ */
 .media-section {
     background: #f8fafc !important;
+    background-image: none !important;
 }
 .books-display h3,
 .media-channels h3 {
@@ -382,26 +393,34 @@ select:focus {
 }
 
 /* ============================================================
-   FOOTER (kept dark for contrast — fix invisible text)
+   FOOTER (kept dark for contrast — force light text everywhere)
    ============================================================ */
 .footer {
     background: #0f172a !important;
     color: #cbd5e1 !important;
 }
 .footer h5,
-.footer .logo {
+.footer .logo,
+.footer .logo-accent {
     color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
 }
-.footer-brand p {
+.footer-brand p,
+.footer p,
+.footer span,
+.footer a {
     color: #94a3b8 !important;
 }
 .footer-links h5 {
     color: #94a3b8 !important;
 }
-.partner-logo {
+.partner-logo,
+.partner-logo span {
     color: #e2e8f0 !important;
 }
-.partner-logo:hover {
+.partner-logo:hover,
+.partner-logo:hover span {
     color: #60a5fa !important;
 }
 .ap-uk {
@@ -416,4 +435,22 @@ select:focus {
 }
 .footer-bottom p {
     color: #64748b !important;
+}
+
+/* Catch-all: ensure body/section copy stays dark on light surfaces */
+.section-header h2,
+.section-lead,
+.hero-content,
+.nav-link,
+.logo {
+    color: inherit;
+}
+.section-header h2 {
+    color: #0f172a !important;
+}
+.section-lead {
+    color: #334155 !important;
+}
+.logo {
+    color: #0f172a !important;
 }

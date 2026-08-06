@@ -1767,6 +1767,29 @@ body.theme-brutalist {
 }
 
 /* Executive Theme Styling Overrides */
+body.theme-executive {
+    color: #0f172a;
+}
+body.theme-executive h1,
+body.theme-executive h2,
+body.theme-executive h3,
+body.theme-executive h4,
+body.theme-executive h5,
+body.theme-executive h6,
+body.theme-executive .section-header h2,
+body.theme-executive .logo {
+    color: #0f172a;
+}
+body.theme-executive p,
+body.theme-executive .section-lead,
+body.theme-executive .hero-lead,
+body.theme-executive .nav-link {
+    color: #334155;
+}
+body.theme-executive .nav-link:hover,
+body.theme-executive .nav-link.active {
+    color: #0f172a;
+}
 body.theme-executive .navbar {
     background: rgba(248, 250, 252, 0.85);
     border-bottom: 1px solid rgba(15, 23, 42, 0.08);
@@ -1808,10 +1831,28 @@ body.theme-executive .profile-glow,
 body.theme-executive .stat-glow {
     display: none;
 }
+body.theme-executive .badge {
+    background: rgba(29, 78, 216, 0.08);
+    border: 1px solid rgba(29, 78, 216, 0.25);
+    color: #1d4ed8;
+    box-shadow: none;
+}
+body.theme-executive .stats-section {
+    background: #f1f5f9;
+}
+body.theme-executive .benefits-section,
+body.theme-executive .gallery-section,
+body.theme-executive .media-section {
+    background: #f8fafc;
+    background-image: none;
+}
 body.theme-executive .stat-card,
 body.theme-executive .benefit-card,
 body.theme-executive .timeline-card,
 body.theme-executive .gallery-card,
+body.theme-executive .gallery-item,
+body.theme-executive .book-card,
+body.theme-executive .channel-card,
 body.theme-executive .media-card,
 body.theme-executive .diagnostic-card,
 body.theme-executive .step-card {
@@ -1820,9 +1861,15 @@ body.theme-executive .step-card {
     border-radius: 6px;
 }
 body.theme-executive .profile-card {
+    background: #ffffff;
     border-radius: 12px;
     border: 1px solid #cbd5e1;
     box-shadow: var(--shadow-neon);
+}
+body.theme-executive .profile-badge {
+    background: rgba(15, 23, 42, 0.9);
+    color: #93c5fd;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 body.theme-executive .stat-card:hover,
 body.theme-executive .benefit-card:hover,
@@ -1831,19 +1878,98 @@ body.theme-executive .media-card:hover {
     border-color: var(--primary);
     box-shadow: var(--shadow-neon-strong);
 }
+body.theme-executive .stat-number,
+body.theme-executive .stat-number-wrapper,
+body.theme-executive .tab-text h3,
+body.theme-executive .timeline-content h3,
+body.theme-executive .gallery-info h4,
+body.theme-executive .book-info h4,
+body.theme-executive .channel-details h5,
+body.theme-executive .books-display h3,
+body.theme-executive .media-channels h3 {
+    color: #0f172a;
+}
+body.theme-executive .stat-label,
+body.theme-executive .tab-text p,
+body.theme-executive .benefit-list li,
+body.theme-executive .timeline-content p,
+body.theme-executive .gallery-info p,
+body.theme-executive .book-info p,
+body.theme-executive .channel-details span,
+body.theme-executive .media-channels .media-intro {
+    color: #334155;
+}
+body.theme-executive .benefit-list li strong {
+    color: #0f172a;
+}
 body.theme-executive .tab-btn {
     background: #e2e8f0;
     color: #475569;
+    border: 1px solid #cbd5e1;
     border-radius: 4px;
+    box-shadow: none;
+}
+body.theme-executive .tab-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
 }
 body.theme-executive .tab-btn.active {
     background: var(--primary);
     color: #ffffff;
 }
-body.theme-executive .diagnostic-select {
+body.theme-executive .visual-card {
+    background: #1e293b;
+}
+body.theme-executive .visual-label {
+    background: rgba(15, 23, 42, 0.9);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+body.theme-executive .diagnostic-section {
+    background: #f1f5f9;
+}
+body.theme-executive .diagnostic-wrapper {
     background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+body.theme-executive .diagnostic-info h2,
+body.theme-executive .results-header h3,
+body.theme-executive .recommendation-block p {
+    color: #0f172a;
+}
+body.theme-executive .diagnostic-info p,
+body.theme-executive .form-group label,
+body.theme-executive .loader-text,
+body.theme-executive .risk-label,
+body.theme-executive .recommendation-block h5,
+body.theme-executive .radio-label span {
+    color: #334155;
+}
+body.theme-executive .badge-partner {
+    background: rgba(29, 78, 216, 0.06);
+    border: 1px solid rgba(29, 78, 216, 0.2);
+    color: #334155;
+}
+body.theme-executive .diagnostic-widget {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+body.theme-executive select,
+body.theme-executive .diagnostic-select {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     border: 1px solid #cbd5e1;
     color: #0f172a;
+}
+body.theme-executive .radio-label input[type="radio"] {
+    border: 2px solid #94a3b8;
+    background: #ffffff;
+}
+body.theme-executive .disclaimer {
+    color: #64748b;
 }
 body.theme-executive .divider {
     background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
@@ -1855,6 +1981,34 @@ body.theme-executive .footer {
 body.theme-executive .footer h5,
 body.theme-executive .footer .logo {
     color: #ffffff;
+}
+body.theme-executive .footer .logo-accent {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+}
+body.theme-executive .footer-brand p,
+body.theme-executive .footer p,
+body.theme-executive .footer span,
+body.theme-executive .footer a,
+body.theme-executive .footer-links h5,
+body.theme-executive .ap-uk,
+body.theme-executive .ap-sub {
+    color: #94a3b8;
+}
+body.theme-executive .partner-logo,
+body.theme-executive .partner-logo span {
+    color: #e2e8f0;
+}
+body.theme-executive .partner-logo:hover,
+body.theme-executive .partner-logo:hover span {
+    color: #60a5fa;
+}
+body.theme-executive .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+body.theme-executive .footer-bottom p {
+    color: #64748b;
 }
 @media (max-width: 768px) {
     body.theme-executive .nav-menu {
@@ -1927,6 +2081,32 @@ body.theme-stealth .tab-btn {
 }
 
 /* Brutalist Theme Styling Overrides */
+body.theme-brutalist {
+    color: #000000;
+}
+body.theme-brutalist h1,
+body.theme-brutalist h2,
+body.theme-brutalist h3,
+body.theme-brutalist h4,
+body.theme-brutalist h5,
+body.theme-brutalist h6,
+body.theme-brutalist .section-header h2,
+body.theme-brutalist .logo {
+    color: #000000;
+}
+body.theme-brutalist p,
+body.theme-brutalist .section-lead,
+body.theme-brutalist .hero-lead,
+body.theme-brutalist .nav-link {
+    color: #1f2937;
+}
+body.theme-brutalist .nav-link:hover,
+body.theme-brutalist .nav-link.active {
+    color: #000000;
+}
+body.theme-brutalist .mobile-toggle .bar {
+    background-color: #000000;
+}
 body.theme-brutalist .btn-primary {
     background: var(--primary);
     color: #ffffff;
@@ -1971,10 +2151,26 @@ body.theme-brutalist .gradient-text {
     color: #000000;
     text-shadow: 2px 2px 0px var(--secondary);
 }
+body.theme-brutalist .stats-section,
+body.theme-brutalist .gallery-section,
+body.theme-brutalist .diagnostic-section {
+    background: #e5e7eb;
+}
+body.theme-brutalist .benefits-section,
+body.theme-brutalist .media-section {
+    background: #f3f4f6;
+    background-image: none;
+}
+body.theme-brutalist .timeline-section {
+    background: #ffffff;
+}
 body.theme-brutalist .stat-card,
 body.theme-brutalist .benefit-card,
 body.theme-brutalist .timeline-card,
 body.theme-brutalist .gallery-card,
+body.theme-brutalist .gallery-item,
+body.theme-brutalist .book-card,
+body.theme-brutalist .channel-card,
 body.theme-brutalist .media-card,
 body.theme-brutalist .diagnostic-card,
 body.theme-brutalist .step-card,
@@ -1992,6 +2188,37 @@ body.theme-brutalist .media-card:hover {
     transform: translate(-4px, -4px);
     box-shadow: 8px 8px 0px #000000;
 }
+body.theme-brutalist .stat-number,
+body.theme-brutalist .stat-number-wrapper,
+body.theme-brutalist .tab-text h3,
+body.theme-brutalist .timeline-content h3,
+body.theme-brutalist .gallery-info h4,
+body.theme-brutalist .book-info h4,
+body.theme-brutalist .channel-details h5,
+body.theme-brutalist .books-display h3,
+body.theme-brutalist .media-channels h3,
+body.theme-brutalist .diagnostic-info h2,
+body.theme-brutalist .results-header h3,
+body.theme-brutalist .recommendation-block p,
+body.theme-brutalist .benefit-list li strong {
+    color: #000000;
+}
+body.theme-brutalist .stat-label,
+body.theme-brutalist .tab-text p,
+body.theme-brutalist .benefit-list li,
+body.theme-brutalist .timeline-content p,
+body.theme-brutalist .gallery-info p,
+body.theme-brutalist .book-info p,
+body.theme-brutalist .channel-details span,
+body.theme-brutalist .media-channels .media-intro,
+body.theme-brutalist .diagnostic-info p,
+body.theme-brutalist .form-group label,
+body.theme-brutalist .loader-text,
+body.theme-brutalist .risk-label,
+body.theme-brutalist .recommendation-block h5,
+body.theme-brutalist .radio-label span {
+    color: #1f2937;
+}
 body.theme-brutalist .hero-section {
     background-color: #f3f4f6;
     background-image: linear-gradient(rgba(0,0,0,0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(0,0,0,0.05) 2px, transparent 2px);
@@ -2002,6 +2229,11 @@ body.theme-brutalist .hero-glow-orb-2,
 body.theme-brutalist .profile-glow,
 body.theme-brutalist .stat-glow {
     display: none;
+}
+body.theme-brutalist .profile-badge {
+    background: #000000;
+    color: #a78bfa;
+    border: 2px solid #000000;
 }
 body.theme-brutalist .tab-btn {
     background: #ffffff;
@@ -2016,11 +2248,49 @@ body.theme-brutalist .tab-btn.active {
     transform: translate(-1px, -1px);
     box-shadow: 3px 3px 0px #000000;
 }
-body.theme-brutalist .diagnostic-select {
+body.theme-brutalist .visual-card {
+    background: #111827;
+    border: 3px solid #000000;
+    border-radius: 0px;
+}
+body.theme-brutalist .visual-label {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+body.theme-brutalist .diagnostic-wrapper {
     background: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 8px 8px 0px #000000;
+    border-radius: 0px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+body.theme-brutalist .diagnostic-widget {
+    background: #f9fafb;
+    border: 2px solid #000000;
+    border-radius: 0px;
+}
+body.theme-brutalist .badge-partner {
+    background: #f3f4f6;
+    border: 2px solid #000000;
+    color: #1f2937;
+    border-radius: 0px;
+}
+body.theme-brutalist select,
+body.theme-brutalist .diagnostic-select {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     border: 2px solid #000000;
     color: #000000;
     border-radius: 0px;
+}
+body.theme-brutalist .radio-label input[type="radio"] {
+    border: 2px solid #000000;
+    background: #ffffff;
+}
+body.theme-brutalist .disclaimer {
+    color: #4b5563;
 }
 body.theme-brutalist .badge {
     background: #ffffff;
@@ -2041,6 +2311,32 @@ body.theme-brutalist .footer {
 body.theme-brutalist .footer h5,
 body.theme-brutalist .footer .logo {
     color: #ffffff;
+}
+body.theme-brutalist .footer .logo-accent {
+    background: none;
+    -webkit-text-fill-color: #ffffff;
+    color: #ffffff;
+}
+body.theme-brutalist .footer-brand p,
+body.theme-brutalist .footer p,
+body.theme-brutalist .footer span,
+body.theme-brutalist .footer a,
+body.theme-brutalist .footer-links h5,
+body.theme-brutalist .ap-uk,
+body.theme-brutalist .ap-sub,
+body.theme-brutalist .footer-bottom p {
+    color: #d1d5db;
+}
+body.theme-brutalist .partner-logo,
+body.theme-brutalist .partner-logo span {
+    color: #ffffff;
+}
+body.theme-brutalist .partner-logo:hover,
+body.theme-brutalist .partner-logo:hover span {
+    color: #c4b5fd;
+}
+body.theme-brutalist .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 @media (max-width: 768px) {
     body.theme-brutalist .nav-menu {
