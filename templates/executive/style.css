@@ -1,5 +1,8 @@
 @import "../../style.css";
 
+/* ============================================================
+   EXECUTIVE ELITE — CSS Variables (Light Theme)
+   ============================================================ */
 :root {
     --bg-dark: #f8fafc;
     --bg-card: #ffffff;
@@ -22,19 +25,52 @@
     --shadow-neon-strong: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
 }
 
-/* Standalone Theme Overrides */
+/* ============================================================
+   GLOBAL BODY & BASE
+   ============================================================ */
+body {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #0f172a !important;
+}
+
+p {
+    color: #334155;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 .theme-switcher-container {
     display: none !important;
 }
-
 .navbar {
-    background: rgba(248, 250, 252, 0.85);
-    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(248, 250, 252, 0.85) !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
 }
 .navbar.scrolled {
-    background: rgba(248, 250, 252, 0.98);
-    border-bottom: 1px solid rgba(15, 23, 42, 0.15);
+    background: rgba(248, 250, 252, 0.98) !important;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.15) !important;
 }
+.nav-link {
+    color: #334155 !important;
+}
+.nav-link:hover {
+    color: #1d4ed8 !important;
+}
+@media (max-width: 768px) {
+    .nav-menu {
+        background: rgba(248, 250, 252, 0.98) !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+    }
+}
+
+/* ============================================================
+   LOGO & GRADIENT TEXT
+   ============================================================ */
 .logo-accent {
     background: linear-gradient(135deg, #1d4ed8 0%, #0369a1 100%);
     -webkit-background-clip: text;
@@ -45,283 +81,339 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 .btn-primary {
-    color: #ffffff;
+    color: #ffffff !important;
 }
 .btn-secondary {
-    background: #ffffff;
-    color: #0f172a;
-    border: 1px solid #cbd5e1;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
 }
 .btn-secondary:hover {
-    background: #f8fafc;
-    border-color: #94a3b8;
+    background: #f8fafc !important;
+    border-color: #94a3b8 !important;
 }
+.btn-link {
+    color: #1d4ed8 !important;
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
 .hero-section {
-    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-    background-size: 24px 24px;
-    background-color: #f8fafc;
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px) !important;
+    background-size: 24px 24px !important;
+    background-color: #f8fafc !important;
 }
 .hero-glow-orb-1,
 .hero-glow-orb-2,
 .profile-glow,
 .stat-glow {
-    display: none;
+    display: none !important;
 }
-.stat-card,
-.benefit-card,
-.timeline-card,
-.gallery-card,
-.media-card,
-.diagnostic-card,
-.step-card {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+.hero-lead {
+    color: #334155 !important;
+}
+.hero-content h1 {
+    color: #0f172a !important;
+}
+.badge {
+    background: rgba(29, 78, 216, 0.08) !important;
+    border: 1px solid rgba(29, 78, 216, 0.25) !important;
+    color: #1d4ed8 !important;
+    box-shadow: none !important;
+}
+.badge-dot {
+    background-color: #1d4ed8 !important;
+    box-shadow: none !important;
 }
 .profile-card {
-    border-radius: 12px;
-    border: 1px solid #cbd5e1;
-    box-shadow: var(--shadow-neon);
-}
-.stat-card:hover,
-.benefit-card:hover,
-.timeline-card:hover,
-.media-card:hover {
-    border-color: var(--primary);
-    box-shadow: var(--shadow-neon-strong);
-}
-.tab-btn {
-    background: #e2e8f0;
-    color: #475569;
-    border-radius: 4px;
-}
-.tab-btn.active {
-    background: var(--primary);
-    color: #ffffff;
-}
-.diagnostic-select {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    color: #0f172a;
-}
-.divider {
-    background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
-}
-.footer {
-    background: #0f172a;
-    color: #cbd5e1;
-}
-.footer h5,
-.footer .logo {
-    color: #ffffff;
-}
-@media (max-width: 768px) {
-    .nav-menu {
-        background: rgba(248, 250, 252, 0.98);
-        border-bottom: 1px solid #e2e8f0;
-    }
+    border-radius: 12px !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: var(--shadow-neon) !important;
 }
 
 /* ============================================================
-   EXECUTIVE ELITE: Fix invisible text & elements on light bg
+   STATS SECTION
    ============================================================ */
-
-/* Hero badge — replace glowing cyan on light bg */
-.badge {
-    background: rgba(29, 78, 216, 0.08);
-    border: 1px solid rgba(29, 78, 216, 0.25);
-    color: var(--primary);
-    box-shadow: none;
-}
-.badge-dot {
-    box-shadow: none;
-}
-
-/* Hero lead text */
-.hero-lead {
-    color: var(--text-secondary);
-}
-
-/* Section headings & lead text */
-h1, h2, h3, h4, h5, h6 {
-    color: var(--text-primary);
-}
-.section-lead {
-    color: var(--text-secondary);
-}
-
-/* Hero section text explicitly */
-.hero-content h1 {
-    color: var(--text-primary);
-}
-
-/* Stats section */
 .stats-section {
-    background: #f1f5f9;
+    background: #f1f5f9 !important;
+}
+.stat-card {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+}
+.stat-card:hover {
+    border-color: #1d4ed8 !important;
+    box-shadow: var(--shadow-neon-strong) !important;
 }
 .stat-icon {
-    color: var(--primary);
+    background: rgba(29, 78, 216, 0.08) !important;
+    box-shadow: none !important;
+    color: #1d4ed8 !important;
 }
 .stat-number,
 .stat-number-wrapper {
-    color: var(--text-primary);
+    color: #0f172a !important;
 }
 .stat-label {
-    color: var(--text-secondary);
+    color: #334155 !important;
 }
 
-/* Tab text */
-.tab-title {
-    color: var(--text-primary);
+/* ============================================================
+   BENEFITS / TABS SECTION
+   ============================================================ */
+.benefits-section {
+    background: #ffffff !important;
 }
-.tab-text p,
-.tab-text ul li {
-    color: var(--text-secondary);
+.tab-btn {
+    background: #e2e8f0 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #475569 !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+}
+.tab-btn:hover {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #94a3b8 !important;
+}
+.tab-btn.active {
+    background: #1d4ed8 !important;
+    border-color: #1d4ed8 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+.tab-text h3 {
+    color: #0f172a !important;
+}
+.tab-text p {
+    color: #334155 !important;
+}
+.benefit-list li {
+    color: #334155 !important;
 }
 .benefit-list li strong {
-    color: var(--text-primary);
+    color: #0f172a !important;
+}
+.benefit-list li::before {
+    background: rgba(13, 148, 136, 0.12) !important;
+    border: 1px solid #0d9488 !important;
+    color: #0d9488 !important;
 }
 
-/* Visual label */
+/* Visual cards inside tab panels */
+.visual-card {
+    background: #1e293b !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+}
 .visual-label {
-    background: rgba(15, 23, 42, 0.75);
-    color: #f1f5f9;
+    background: rgba(15, 23, 42, 0.85) !important;
+    color: #f1f5f9 !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
 }
 
-/* Timeline */
-.timeline-date {
-    color: var(--primary);
-}
-.timeline-content h3 {
-    color: var(--text-primary);
-}
-.timeline-content p {
-    color: var(--text-secondary);
-}
-.timeline-marker {
-    background: var(--primary);
-    border-color: #e2e8f0;
+/* ============================================================
+   TIMELINE SECTION
+   ============================================================ */
+.timeline-section {
+    background: #f8fafc !important;
 }
 .timeline::before {
-    background: #cbd5e1;
+    background: #cbd5e1 !important;
+}
+.timeline-marker {
+    background: #1d4ed8 !important;
+    border-color: #f8fafc !important;
+}
+.timeline-date {
+    color: #1d4ed8 !important;
+}
+.timeline-content h3 {
+    color: #0f172a !important;
+}
+.timeline-content p {
+    color: #334155 !important;
+}
+.timeline-card {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
 }
 
-/* Gallery */
+/* ============================================================
+   GALLERY SECTION
+   ============================================================ */
+.gallery-section {
+    background: #f1f5f9 !important;
+}
 .gallery-info h4 {
-    color: var(--text-primary);
+    color: #0f172a !important;
 }
 .gallery-info p {
-    color: var(--text-secondary);
+    color: #334155 !important;
 }
 
-/* Media section — remove hardcoded dark gradient */
+/* ============================================================
+   MEDIA & PUBLICATIONS SECTION
+   ============================================================ */
 .media-section {
-    background: #f8fafc;
+    background: #f8fafc !important;
 }
 .books-display h3,
 .media-channels h3 {
-    color: var(--text-primary);
+    color: #0f172a !important;
 }
 .media-channels .media-intro {
-    color: var(--text-secondary);
+    color: #334155 !important;
+}
+.book-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
 }
 .book-info h4 {
-    color: var(--text-primary);
+    color: #0f172a !important;
 }
 .book-info p {
-    color: var(--text-secondary);
+    color: #334155 !important;
+}
+.channel-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
 }
 .channel-details h5 {
-    color: var(--text-primary);
+    color: #0f172a !important;
 }
 .channel-details span {
-    color: var(--text-secondary);
-}
-.btn-link {
-    color: var(--primary);
+    color: #334155 !important;
 }
 
-/* Diagnostic Section — replace dark card backgrounds */
+/* ============================================================
+   DIAGNOSTIC SECTION — Main fix area
+   ============================================================ */
 .diagnostic-section {
-    background: #f1f5f9;
+    background: #f1f5f9 !important;
 }
 .diagnostic-wrapper {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 .diagnostic-info h2 {
-    color: var(--text-primary);
+    color: #0f172a !important;
 }
 .diagnostic-info p {
-    color: var(--text-secondary);
+    color: #334155 !important;
 }
 .badge-partner {
-    background: rgba(29, 78, 216, 0.05);
-    border: 1px solid rgba(29, 78, 216, 0.15);
-    color: var(--text-secondary);
+    background: rgba(29, 78, 216, 0.06) !important;
+    border: 1px solid rgba(29, 78, 216, 0.2) !important;
+    color: #334155 !important;
 }
 .badge-partner strong {
-    color: var(--primary);
+    color: #1d4ed8 !important;
 }
 
-/* Diagnostic widget inner box */
+/* Widget inner box */
 .diagnostic-widget {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
 }
 .form-group label {
-    color: var(--text-secondary);
+    color: #334155 !important;
 }
 
-/* Select dropdown — override hardcoded dark bg */
-.diagnostic-select,
-select {
-    background-color: #ffffff;
-    border: 1px solid #cbd5e1;
-    color: var(--text-primary);
+/* Select dropdowns */
+select,
+.diagnostic-select {
+    background-color: #ffffff !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
 }
 select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+    border-color: #1d4ed8 !important;
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1) !important;
 }
 
 /* Radio buttons */
 .radio-label span {
-    color: var(--text-secondary);
+    color: #334155 !important;
 }
 .radio-label input[type="radio"] {
-    border: 2px solid #94a3b8;
+    border: 2px solid #94a3b8 !important;
+    background: #ffffff !important;
+}
+
+/* Loader */
+.cyber-loader {
+    border: 3px solid rgba(29, 78, 216, 0.1) !important;
+    border-top-color: #1d4ed8 !important;
+}
+.loader-text {
+    color: #334155 !important;
 }
 
 /* Results panel */
 .results-header h3 {
-    color: var(--text-primary);
+    color: #0f172a !important;
 }
 .risk-label {
-    color: var(--text-secondary);
+    color: #334155 !important;
 }
 .recommendation-block h5 {
-    color: var(--text-secondary);
+    color: #334155 !important;
 }
 .recommendation-block p {
-    color: var(--text-primary);
+    color: #0f172a !important;
 }
 .disclaimer {
-    color: #64748b;
+    color: #64748b !important;
 }
-.loader-text {
-    color: var(--text-secondary);
+.divider {
+    background: linear-gradient(90deg, transparent, #cbd5e1, transparent) !important;
 }
 
-/* Footer link colors */
+/* ============================================================
+   FOOTER (kept dark for contrast — fix invisible text)
+   ============================================================ */
+.footer {
+    background: #0f172a !important;
+    color: #cbd5e1 !important;
+}
+.footer h5,
+.footer .logo {
+    color: #ffffff !important;
+}
 .footer-brand p {
-    color: #cbd5e1;
+    color: #94a3b8 !important;
 }
 .footer-links h5 {
-    color: #94a3b8;
+    color: #94a3b8 !important;
+}
+.partner-logo {
+    color: #e2e8f0 !important;
+}
+.partner-logo:hover {
+    color: #60a5fa !important;
+}
+.ap-uk {
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #94a3b8 !important;
 }
 .ap-sub {
-    color: #94a3b8;
+    color: #94a3b8 !important;
+}
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.footer-bottom p {
+    color: #64748b !important;
 }
