@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load saved theme on startup
-    const savedTheme = localStorage.getItem('amit-dubey-theme') || 'cyber';
+    const savedTheme = localStorage.getItem('amit-dubey-theme') || 'executive';
     const activeOpt = document.querySelector(`.theme-option[data-theme="${savedTheme}"]`);
     if (activeOpt && themeOptions) {
         themeOptions.forEach(o => o.classList.remove('active'));
