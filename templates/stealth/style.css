@@ -1,0 +1,90 @@
+@import "../../style.css";
+
+:root {
+    --bg-dark: #0b0c10;
+    --bg-card: rgba(31, 40, 51, 0.65);
+    --bg-card-hover: rgba(31, 40, 51, 0.95);
+    --border-color: rgba(255, 183, 3, 0.18);
+    --border-hover: rgba(255, 183, 3, 0.5);
+    --primary: #ffb703;
+    --primary-glow: rgba(255, 183, 3, 0.25);
+    --secondary: #fb8500;
+    --secondary-glow: rgba(251, 133, 0, 0.2);
+    --accent: #2ec4b6;
+    --accent-glow: rgba(46, 196, 182, 0.2);
+    --text-primary: #e5e5e5;
+    --text-secondary: #a3a3a3;
+    --text-muted: #737373;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Space Mono', monospace;
+    --glass-blur: blur(8px);
+    --shadow-neon: 0 0 15px rgba(255, 183, 3, 0.12);
+    --shadow-neon-strong: 0 0 30px rgba(255, 183, 3, 0.25);
+}
+
+/* Standalone Theme Overrides */
+.theme-switcher-container {
+    display: none !important;
+}
+
+.navbar {
+    background: rgba(11, 12, 16, 0.85);
+    border-bottom: 1px solid rgba(255, 183, 3, 0.1);
+}
+.logo-accent {
+    background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.gradient-text {
+    background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.btn-primary {
+    color: #0b0c10;
+}
+.btn-secondary {
+    background: rgba(31, 40, 51, 0.2);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 183, 3, 0.25);
+}
+.btn-secondary:hover {
+    background: rgba(255, 183, 3, 0.1);
+    border-color: var(--primary);
+}
+.hero-glow-orb-1 { background: rgba(255, 183, 3, 0.08); }
+.hero-glow-orb-2 { background: rgba(251, 133, 0, 0.06); }
+.profile-glow { background: radial-gradient(circle, rgba(255, 183, 3, 0.25) 0%, transparent 70%); }
+.stat-glow { background: radial-gradient(circle, rgba(255, 183, 3, 0.15) 0%, transparent 60%); }
+.stat-number,
+.timeline-year,
+.risk-badge {
+    font-family: 'Space Mono', monospace;
+}
+.diagnostic-select,
+.step-card {
+    background: rgba(31, 40, 51, 0.4);
+    border: 1px solid rgba(255, 183, 3, 0.2);
+    color: #e5e5e5;
+}
+.stat-card,
+.benefit-card,
+.timeline-card,
+.gallery-card,
+.media-card,
+.diagnostic-card {
+    border-radius: 8px;
+}
+.profile-card {
+    border-radius: 12px;
+}
+.tab-btn {
+    border-radius: 4px;
+}
+@media (max-width: 768px) {
+    .nav-menu {
+        background: rgba(11, 12, 16, 0.98);
+        border-bottom: 1px solid rgba(255, 183, 3, 0.1);
+    }
+}

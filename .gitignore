@@ -1,0 +1,12 @@
+# Large files not needed for hosting
+*.pptx
+*.mp4
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
