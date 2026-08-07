@@ -819,7 +819,7 @@ h1, h2, h3, h4, h5, h6 {
     background: linear-gradient(135deg, color-mix(in srgb, var(--bg-dark) 94%, var(--primary) 6%), var(--bg-dark));
 }
 
-.casework-kicker {
+.casework-modal-label {
     display: inline-block;
     margin-bottom: 14px;
     color: var(--primary);
