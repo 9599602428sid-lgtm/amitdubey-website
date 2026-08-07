@@ -251,6 +251,7 @@
                             <div><strong>200M+</strong><span>total platform users</span></div>
                             <div><strong>650M</strong><span>citizens vaccinated via the assessed platform</span></div>
                         </div>
+                        <button class="casework-link" type="button" data-case="platform">Read case study <span aria-hidden="true">→</span></button>
                     </div>
                 </div>
 
@@ -260,36 +261,56 @@
                         <h3>Financial fraud &amp; scam networks</h3>
                         <p>Investigation experience spanning fraudulent payment journeys, spoofed identities and deceptive digital touchpoints.</p>
                         <div class="casework-takeaway"><strong>Resilience focus</strong><span>Detect impersonation early and interrupt the path to payment.</span></div>
+                        <button class="casework-link" type="button" data-case="fraud">Explore casework <span aria-hidden="true">→</span></button>
                     </article>
                     <article class="casework-card">
                         <span class="casework-number">03</span>
                         <h3>Digital identity theft</h3>
                         <p>Casework involving compromised identities and the misuse of trust signals in online environments.</p>
                         <div class="casework-takeaway"><strong>Resilience focus</strong><span>Make identity verification a layered control, not a single check.</span></div>
+                        <button class="casework-link" type="button" data-case="identity">Explore casework <span aria-hidden="true">→</span></button>
                     </article>
                     <article class="casework-card">
                         <span class="casework-number">04</span>
                         <h3>Corporate espionage</h3>
                         <p>Investigations where digital evidence, access patterns and information movement must be read together.</p>
                         <div class="casework-takeaway"><strong>Resilience focus</strong><span>Join behaviour analytics with a disciplined evidence trail.</span></div>
+                        <button class="casework-link" type="button" data-case="espionage">Explore casework <span aria-hidden="true">→</span></button>
                     </article>
                     <article class="casework-card">
                         <span class="casework-number">05</span>
                         <h3>Online extortion</h3>
                         <p>Experience of attack scenarios in which technical containment and executive decision-making move in parallel.</p>
                         <div class="casework-takeaway"><strong>Resilience focus</strong><span>Rehearse the incident command, communications and recovery decisions.</span></div>
+                        <button class="casework-link" type="button" data-case="extortion">Explore casework <span aria-hidden="true">→</span></button>
                     </article>
                     <article class="casework-card">
                         <span class="casework-number">06</span>
                         <h3>Terrorism-linked cybercrime</h3>
                         <p>Work alongside investigation agencies and intelligence bodies on cases requiring a high-integrity forensic approach.</p>
                         <div class="casework-takeaway"><strong>Resilience focus</strong><span>Preserve evidence while coordinating a proportionate response.</span></div>
+                        <button class="casework-link" type="button" data-case="terrorism">Explore casework <span aria-hidden="true">→</span></button>
                     </article>
                 </div>
 
                 <p class="casework-note">Case details are intentionally anonymised to protect investigations, victims and partner agencies. Themes and outcomes are drawn from the supplied Amit Dubey Global Platform Prototype.</p>
             </div>
         </section>
+
+        <div class="casework-modal" id="casework-modal" role="dialog" aria-modal="true" aria-labelledby="casework-modal-title" aria-hidden="true">
+            <div class="casework-modal-backdrop" data-case-close></div>
+            <div class="casework-modal-panel" role="document">
+                <button class="casework-modal-close" type="button" aria-label="Close case study" data-case-close>×</button>
+                <span class="casework-kicker" id="casework-modal-label">Selected casework</span>
+                <h2 id="casework-modal-title"></h2>
+                <p id="casework-modal-summary"></p>
+                <div class="casework-modal-detail">
+                    <h3>What this experience brings</h3>
+                    <p id="casework-modal-detail"></p>
+                </div>
+                <p class="casework-modal-note">Case details are anonymised to protect investigations, victims and partner agencies.</p>
+            </div>
+        </div>
 
         <!-- Milestones Timeline Section -->
         <section class="timeline-section" id="timeline">

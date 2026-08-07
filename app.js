@@ -232,7 +232,84 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // 5. Theme Switcher System
+    // 5. Expandable casework details
+    const caseworkModal = document.getElementById('casework-modal');
+    const caseworkButtons = document.querySelectorAll('[data-case]');
+    const caseworkTitle = document.getElementById('casework-modal-title');
+    const caseworkSummary = document.getElementById('casework-modal-summary');
+    const caseworkDetail = document.getElementById('casework-modal-detail');
+    const caseworkCloseButtons = document.querySelectorAll('[data-case-close]');
+    let previouslyFocusedCaseworkElement = null;
+
+    const caseworkContent = {
+        platform: {
+            label: 'National digital infrastructure',
+            title: 'Securing a population-scale health platform under live threat',
+            summary: 'The security assessment addressed authentication and session-handling weaknesses in a national contact-tracing application, alongside backend-security decisions during rapid growth.',
+            detail: 'The platform reached 50 million users in 13 days and later supported a national vaccination programme. This experience is relevant wherever a public-facing service must scale quickly while protecting identity, sessions and service continuity.'
+        },
+        fraud: {
+            label: 'Anonymised investigation theme',
+            title: 'Financial fraud & scam networks',
+            summary: 'This casework spans fraudulent payment journeys, spoofed identities and deceptive digital touchpoints used to create urgency and move victims towards an unauthorised transaction.',
+            detail: 'The defensive lesson is to connect customer protection, fraud operations and technical controls: detect impersonation signals early, give people an easy way to verify a request, and interrupt risky journeys before payment is made.'
+        },
+        identity: {
+            label: 'Anonymised investigation theme',
+            title: 'Digital identity theft',
+            summary: 'The investigation theme concerns compromised identities and the misuse of trust signals in online environments.',
+            detail: 'The resilience lesson is that one login check is rarely enough. Layered identity verification, sensible session controls and clear recovery processes reduce the chance that a single compromised credential becomes a full account takeover.'
+        },
+        espionage: {
+            label: 'Anonymised investigation theme',
+            title: 'Corporate espionage',
+            summary: 'This casework involves situations where digital evidence, access patterns and information movement need to be understood as one coherent picture.',
+            detail: 'For organisations, the practical outcome is an evidence-ready environment: know where sensitive information is held, monitor meaningful changes in access behaviour and retain records that allow a forensic timeline to be established.'
+        },
+        extortion: {
+            label: 'Anonymised investigation theme',
+            title: 'Online extortion',
+            summary: 'These scenarios require technical containment and executive decision-making to progress in parallel, often under intense time pressure.',
+            detail: 'A resilient organisation has rehearsed who leads, what is isolated first, how decisions are documented and how it communicates with affected parties. The aim is to shorten uncertainty before an attacker dictates the pace.'
+        },
+        terrorism: {
+            label: 'Anonymised investigation theme',
+            title: 'Terrorism-linked cybercrime',
+            summary: 'This work is carried out alongside investigation agencies and intelligence bodies where a rigorous, high-integrity forensic approach is essential.',
+            detail: 'The applicable discipline is preserving reliable evidence while coordinating a proportionate response. Clear escalation, controlled access to evidence and accurate records help organisations support the wider investigation without compromising it.'
+        }
+    };
+
+    function closeCaseworkModal() {
+        if (!caseworkModal) return;
+        caseworkModal.classList.remove('is-open');
+        caseworkModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('casework-modal-open');
+        previouslyFocusedCaseworkElement?.focus();
+    }
+
+    caseworkButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const content = caseworkContent[button.dataset.case];
+            if (!content || !caseworkModal) return;
+            previouslyFocusedCaseworkElement = button;
+            document.getElementById('casework-modal-label').textContent = content.label;
+            caseworkTitle.textContent = content.title;
+            caseworkSummary.textContent = content.summary;
+            caseworkDetail.textContent = content.detail;
+            caseworkModal.classList.add('is-open');
+            caseworkModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('casework-modal-open');
+            caseworkModal.querySelector('.casework-modal-close').focus();
+        });
+    });
+
+    caseworkCloseButtons.forEach(button => button.addEventListener('click', closeCaseworkModal));
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && caseworkModal?.classList.contains('is-open')) closeCaseworkModal();
+    });
+
+    // 6. Theme Switcher System
     const themeToggle = document.getElementById('theme-switcher-toggle');
     const themeMenu = document.getElementById('theme-menu');
     const themeOptions = document.querySelectorAll('.theme-option');
@@ -293,4 +370,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     applyTheme(savedTheme);
 });
-
