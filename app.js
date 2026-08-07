@@ -238,6 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const caseworkTitle = document.getElementById('casework-modal-title');
     const caseworkSummary = document.getElementById('casework-modal-summary');
     const caseworkDetail = document.getElementById('casework-modal-detail');
+    const caseworkImage = document.getElementById('casework-modal-image');
+    const caseworkSourceLink = document.getElementById('casework-source-link');
     const caseworkCloseButtons = document.querySelectorAll('[data-case-close]');
     let previouslyFocusedCaseworkElement = null;
 
@@ -246,37 +248,57 @@ document.addEventListener('DOMContentLoaded', () => {
             label: 'National digital infrastructure',
             title: 'Securing a population-scale health platform under live threat',
             summary: 'The security assessment addressed authentication and session-handling weaknesses in a national contact-tracing application, alongside backend-security decisions during rapid growth.',
-            detail: 'The platform reached 50 million users in 13 days and later supported a national vaccination programme. This experience is relevant wherever a public-facing service must scale quickly while protecting identity, sessions and service continuity.'
+            detail: 'The platform reached 50 million users in 13 days and later supported a national vaccination programme. This experience is relevant wherever a public-facing service must scale quickly while protecting identity, sessions and service continuity.',
+            image: 'images/image73.png',
+            imageAlt: 'Amit Dubey speaking at a digital government event'
         },
         fraud: {
             label: 'Anonymised investigation theme',
             title: 'Financial fraud & scam networks',
-            summary: 'This casework spans fraudulent payment journeys, spoofed identities and deceptive digital touchpoints used to create urgency and move victims towards an unauthorised transaction.',
-            detail: 'The defensive lesson is to connect customer protection, fraud operations and technical controls: detect impersonation signals early, give people an easy way to verify a request, and interrupt risky journeys before payment is made.'
+            summary: 'A public Hidden Files episode describes a fraudster taking money from a victim after accessing her WhatsApp—an example of account compromise becoming a payment-fraud event.',
+            detail: 'The defensive lesson is to connect customer protection, fraud operations and technical controls: detect impersonation signals early, give people an easy way to verify a request, and interrupt risky journeys before payment is made.',
+            image: 'images/casework-financial-fraud.png',
+            imageAlt: 'Conceptual visualisation of payment-fraud detection',
+            sourceUrl: 'https://omny.fm/shows/hidden-files-1/ep-5-whatsapp-hack-and-money-fraud-hidden-files-3',
+            sourceLabel: 'Listen to the public case reference'
         },
         identity: {
             label: 'Anonymised investigation theme',
             title: 'Digital identity theft',
-            summary: 'The investigation theme concerns compromised identities and the misuse of trust signals in online environments.',
-            detail: 'The resilience lesson is that one login check is rarely enough. Layered identity verification, sensible session controls and clear recovery processes reduce the chance that a single compromised credential becomes a full account takeover.'
+            summary: 'A public Hidden Files loan-app fraud episode highlights the risk of providing identity proofs to untrusted online platforms.',
+            detail: 'The resilience lesson is that one login check is rarely enough. Layered identity verification, sensible session controls and clear recovery processes reduce the chance that a single compromised credential becomes a full account takeover.',
+            image: 'images/casework-identity-theft.png',
+            imageAlt: 'Conceptual visualisation of identity protection and account takeover',
+            sourceUrl: 'https://music.amazon.co.uk/podcasts/c54444e0-5daf-45de-a0cc-ef70ccb225b1/episodes/4107bce7-5a4e-424e-b1fa-5efad7b53eb7/hidden-files-ep-10-loan-app-fraud',
+            sourceLabel: 'Listen to the public case reference'
         },
         espionage: {
             label: 'Anonymised investigation theme',
             title: 'Corporate espionage',
-            summary: 'This casework involves situations where digital evidence, access patterns and information movement need to be understood as one coherent picture.',
-            detail: 'For organisations, the practical outcome is an evidence-ready environment: know where sensitive information is held, monitor meaningful changes in access behaviour and retain records that allow a forensic timeline to be established.'
+            summary: 'A public Hidden Files episode, “Critical Alert”, describes an apparent IT software update that resulted in sensitive company information being leaked.',
+            detail: 'For organisations, the practical outcome is an evidence-ready environment: know where sensitive information is held, monitor meaningful changes in access behaviour and retain records that allow a forensic timeline to be established.',
+            image: 'images/casework-enterprise-response.png',
+            imageAlt: 'Conceptual visualisation of enterprise data protection and incident response',
+            sourceUrl: 'https://podcasts.apple.com/us/podcast/hidden-files/id1529394507',
+            sourceLabel: 'View the Hidden Files public listing'
         },
         extortion: {
             label: 'Anonymised investigation theme',
             title: 'Online extortion',
-            summary: 'These scenarios require technical containment and executive decision-making to progress in parallel, often under intense time pressure.',
-            detail: 'A resilient organisation has rehearsed who leads, what is isolated first, how decisions are documented and how it communicates with affected parties. The aim is to shorten uncertainty before an attacker dictates the pace.'
+            summary: 'A public Hidden Files ransomware episode follows a business owner targeted by ransomware and the escalation that followed after the initial compromise.',
+            detail: 'A resilient organisation has rehearsed who leads, what is isolated first, how decisions are documented and how it communicates with affected parties. The aim is to shorten uncertainty before an attacker dictates the pace.',
+            image: 'images/casework-enterprise-response.png',
+            imageAlt: 'Conceptual visualisation of enterprise ransomware incident response',
+            sourceUrl: 'https://podcasts.apple.com/us/podcast/hidden-files/id1529394507',
+            sourceLabel: 'View the Hidden Files public listing'
         },
         terrorism: {
             label: 'Anonymised investigation theme',
             title: 'Terrorism-linked cybercrime',
-            summary: 'This work is carried out alongside investigation agencies and intelligence bodies where a rigorous, high-integrity forensic approach is essential.',
-            detail: 'The applicable discipline is preserving reliable evidence while coordinating a proportionate response. Clear escalation, controlled access to evidence and accurate records help organisations support the wider investigation without compromising it.'
+            summary: 'The supplied profile records terrorism-linked investigation experience, but no named public case narrative was found during this research.',
+            detail: 'The applicable discipline is preserving reliable evidence while coordinating a proportionate response. Clear escalation, controlled access to evidence and accurate records help organisations support the wider investigation without compromising it.',
+            image: 'images/casework-enterprise-response.png',
+            imageAlt: 'Conceptual visualisation of a high-integrity cyber investigation'
         }
     };
 
@@ -297,6 +319,12 @@ document.addEventListener('DOMContentLoaded', () => {
             caseworkTitle.textContent = content.title;
             caseworkSummary.textContent = content.summary;
             caseworkDetail.textContent = content.detail;
+            caseworkImage.src = content.image;
+            caseworkImage.alt = content.imageAlt;
+            caseworkImage.hidden = !content.image;
+            caseworkSourceLink.href = content.sourceUrl || '#';
+            caseworkSourceLink.textContent = content.sourceLabel || '';
+            caseworkSourceLink.hidden = !content.sourceUrl;
             caseworkModal.classList.add('is-open');
             caseworkModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('casework-modal-open');

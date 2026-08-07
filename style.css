@@ -1051,6 +1051,15 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 2rem;
 }
 
+.casework-modal-image {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    margin: 0 0 24px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    object-fit: cover;
+}
+
 .casework-modal-panel > p {
     color: var(--text-secondary);
     font-size: 1.03rem;
@@ -1088,6 +1097,21 @@ h1, h2, h3, h4, h5, h6 {
 .casework-modal-note {
     color: var(--text-secondary);
     font-size: 0.92rem;
+}
+
+.casework-source-link {
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+    margin-bottom: 22px;
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.casework-source-link:hover {
+    color: var(--secondary);
 }
 
 .casework-modal-note {
