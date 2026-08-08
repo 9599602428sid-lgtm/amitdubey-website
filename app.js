@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formattedDate = new Date(`${data.date}T12:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     const subject = encodeURIComponent(`Consultation request — ${data.name}`);
     const body = encodeURIComponent(`Hello Amit,\n\nI would like to request a ${data.service} consultation.\n\nPreferred time: ${formattedDate}, ${data.time} (IST)\nOrganisation: ${data.organisation || 'Not provided'}\nEmail: ${data.email}\nPhone: ${data.phone || 'Not provided'}\n\nBrief: ${data.message}\n\nKind regards,\n${data.name}`);
-    confirmation.innerHTML = `<strong>Your consultation request is saved.</strong><p>Preferred slot: ${formattedDate} at ${data.time} IST. Open the prepared email to send the request and confirm availability.</p><a class="button button-primary" href="mailto:hello.siddhantsuri@gmail.com?subject=${subject}&body=${body}">Send consultation request</a>`;
+    confirmation.innerHTML = `<strong>Your consultation request is saved.</strong><p>Preferred slot: ${formattedDate} at ${data.time} IST. Open the prepared email to send the request and confirm availability.</p><a class="button button-primary" href="mailto:?subject=${subject}&body=${body}">Open prepared email</a>`;
     confirmation.hidden = false;
     confirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     form.reset();
