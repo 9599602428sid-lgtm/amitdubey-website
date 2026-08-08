@@ -2863,5 +2863,14 @@ body.theme-brutalist .theme-option.active {
 body.theme-executive .consultation-wrapper { background: #ffffff; border-color: #dbe3ee; box-shadow: 0 14px 36px rgba(15,23,42,.08); }
 body.theme-executive .consultation-form { background: #f8fafc; border-color: #dbe3ee; }
 body.theme-executive .consultation-form input, body.theme-executive .consultation-form textarea { background: #ffffff; border-color: #cbd5e1; color: #0f172a; }
-body.theme-brutalist .consultation-wrapper, body.theme-brutalist .consultation-form { border: 3px solid #000; border-radius: 0; box-shadow: 6px 6px 0 #000; }
+body.theme-brutalist .consultation-wrapper { background: #ffffff; border: 3px solid #000; border-radius: 0; box-shadow: 6px 6px 0 #000; }
+body.theme-brutalist .consultation-form { background: #f3f4f6; border: 3px solid #000; border-radius: 0; box-shadow: 6px 6px 0 #000; }
+body.theme-brutalist .consultation-info h2,
+body.theme-brutalist .consultation-info > p,
+body.theme-brutalist .consultation-points li,
+body.theme-brutalist .consultation-form label { color: #000000; }
+body.theme-brutalist .consultation-form input,
+body.theme-brutalist .consultation-form textarea { background: #ffffff; border: 2px solid #000000; border-radius: 0; color: #000000; }
+body.theme-brutalist .consultation-form input::placeholder,
+body.theme-brutalist .consultation-form textarea::placeholder { color: #4b5563; opacity: 1; }
 @media (max-width: 768px) { .consultation-wrapper { grid-template-columns: 1fr; padding: 28px; } .consultation-form-grid { grid-template-columns: 1fr; gap: 0; } }
