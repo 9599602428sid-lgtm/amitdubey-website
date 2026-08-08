@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Highlight Current Section on Scroll
     function highlightNavLink() {
+        // Multi-page navigation uses explicit page URLs; retain the page's active link.
+        if (![...navLinks].some(link => link.getAttribute('href').startsWith('#'))) return;
         const scrollPosition = window.scrollY + 100;
         const sections = document.querySelectorAll('section, footer');
         
