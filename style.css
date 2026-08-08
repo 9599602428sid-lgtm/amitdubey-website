@@ -2849,6 +2849,7 @@ body.theme-brutalist .theme-option.active {
 
 /* Consultation booking — uses the existing site theme variables */
 .consultation-section { padding: 0 0 100px; position: relative; z-index: 5; }
+.consultation-page .consultation-section { padding-top: 115px; }
 .consultation-wrapper { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; padding: 50px; border: 1px solid var(--border-color); border-radius: 20px; background: linear-gradient(135deg, rgba(16, 20, 32, 0.8), rgba(10, 12, 20, 0.9)); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 .consultation-info h2 { font-size: 2.25rem; margin: 14px 0 16px; }
 .consultation-info > p { color: var(--text-secondary); font-size: 1.05rem; }
