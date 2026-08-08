@@ -28,9 +28,10 @@
                 <a href="#gallery" class="nav-link">Gallery</a>
                 <a href="#media" class="nav-link">Media & Books</a>
                 <a href="#diagnostic" class="nav-link">Cyber Diagnostic</a>
+                <a href="#consultation" class="nav-link">Consultation</a>
             </nav>
             <div class="nav-cta-wrapper">
-                <a href="#diagnostic" class="btn btn-primary btn-sm">Start Cyber Diagnostic</a>
+                <a href="#consultation" class="btn btn-primary btn-sm">Book a Consultation</a>
             </div>
             <button class="mobile-toggle" aria-label="Toggle navigation" id="menu-toggle">
                 <span class="bar"></span>
@@ -660,6 +661,44 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consultation Booking -->
+        <section class="consultation-section" id="consultation">
+            <div class="container">
+                <div class="consultation-wrapper">
+                    <div class="consultation-info">
+                        <span class="section-tag">CONFIDENTIAL CONSULTATION</span>
+                        <h2>Book a Cyber Resilience Consultation</h2>
+                        <p>Choose a preferred time and share the context of your enquiry. Your request will be sent directly to our team for confirmation.</p>
+                        <ul class="consultation-points">
+                            <li>30-minute introductory call</li>
+                            <li>Advisory, investigation, training or media enquiries</li>
+                            <li>All appointment times are in IST</li>
+                        </ul>
+                    </div>
+                    <form class="consultation-form" action="https://formsubmit.co/hello.siddhantsuri@gmail.com" method="POST">
+                        <input type="hidden" name="_subject" value="New Amit Dubey consultation request">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <div class="consultation-form-grid">
+                            <div class="form-group"><label for="consultation-name">Full name</label><input id="consultation-name" name="name" type="text" required></div>
+                            <div class="form-group"><label for="consultation-email">Email address</label><input id="consultation-email" name="email" type="email" required></div>
+                        </div>
+                        <div class="consultation-form-grid">
+                            <div class="form-group"><label for="consultation-company">Organisation</label><input id="consultation-company" name="organisation" type="text"></div>
+                            <div class="form-group"><label for="consultation-phone">Phone</label><input id="consultation-phone" name="phone" type="tel"></div>
+                        </div>
+                        <div class="consultation-form-grid">
+                            <div class="form-group"><label for="consultation-date">Preferred date</label><input id="consultation-date" name="preferred_date" type="date" required></div>
+                            <div class="form-group"><label for="consultation-time">Preferred time (IST)</label><select id="consultation-time" name="preferred_time" required><option value="" disabled selected>Select a time</option><option>10:00 AM</option><option>11:30 AM</option><option>2:00 PM</option><option>3:30 PM</option><option>5:00 PM</option></select></div>
+                        </div>
+                        <div class="form-group"><label for="consultation-topic">Enquiry type</label><select id="consultation-topic" name="enquiry_type" required><option value="" disabled selected>Select an option</option><option>Cyber resilience advisory</option><option>Incident or investigation support</option><option>Fraud prevention</option><option>Training or leadership briefing</option><option>Speaking or media enquiry</option></select></div>
+                        <div class="form-group"><label for="consultation-message">Brief context</label><textarea id="consultation-message" name="message" rows="4" required placeholder="Please do not include passwords or sensitive personal information."></textarea></div>
+                        <button type="submit" class="btn btn-primary btn-block">Send Consultation Request</button>
+                    </form>
                 </div>
             </div>
         </section>
