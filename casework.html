@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Playfair+Display:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -112,7 +112,7 @@
             <div class="casework-modal-panel" role="document">
                 <button class="casework-modal-close" type="button" aria-label="Close case study" data-case-close>&times;</button>
                 <span class="casework-modal-label" id="casework-modal-label">Selected casework</span>
-                <img class="casework-modal-image" id="casework-modal-image" src="" alt="" hidden>
+                <img class="casework-modal-image" id="casework-modal-image" src="" alt="" hidden loading="lazy" decoding="async">
                 <h2 id="casework-modal-title"></h2>
                 <p id="casework-modal-summary"></p>
                 <div class="casework-modal-detail">
@@ -180,6 +180,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
 </body>
 </html>

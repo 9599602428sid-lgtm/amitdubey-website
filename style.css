@@ -47,8 +47,26 @@ a {
     text-decoration: none;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 ul {
     list-style: none;
+}
+
+/* Faster first paint for off-screen sections without changing layout */
+.stats-section,
+.benefits-section,
+.timeline-section,
+.gallery-section,
+.casework-section,
+.media-section,
+.diagnostic-section,
+.consultation-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
 }
 
 /* Scrollbar Styling */
@@ -2094,6 +2112,10 @@ select:focus {
     .film-meta {
         justify-content: center;
     }
+    .film-content .btn {
+        width: 100%;
+        max-width: 320px;
+    }
     .nav-menu {
         display: none;
         flex-direction: column;
@@ -2158,6 +2180,57 @@ select:focus {
     }
     .casework-grid {
         grid-template-columns: 1fr;
+    }
+    .hero-content h1 {
+        font-size: 2.15rem;
+        line-height: 1.15;
+    }
+    .hero-lead,
+    .section-lead {
+        font-size: 0.98rem;
+    }
+    .media-section,
+    .benefits-section,
+    .profile-section,
+    .timeline-section,
+    .gallery-section,
+    .diagnostic-section,
+    .casework-section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .container {
+        padding: 0 16px;
+    }
+    .film-feature {
+        padding: 18px;
+        margin-top: 32px;
+    }
+    .film-poster-wrap {
+        max-width: 180px;
+    }
+    .film-content h3 {
+        font-size: 1.3rem;
+    }
+    .tabs-nav {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .tab-btn {
+        flex: 1 1 calc(50% - 8px);
+        min-height: 44px;
+        font-size: 0.85rem;
+    }
+    .mobile-toggle {
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+    }
+    .nav-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
     }
 }
 

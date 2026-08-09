@@ -5,15 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    // Sticky Navbar on Scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+    // Sticky Navbar on Scroll (rAF-throttled for smoother mobile scrolling)
+    let scrollTicking = false;
+    const onScrollFrame = () => {
+        if (header) {
+            header.classList.toggle('scrolled', window.scrollY > 50);
         }
         highlightNavLink();
-    });
+        scrollTicking = false;
+    };
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            scrollTicking = true;
+            requestAnimationFrame(onScrollFrame);
+        }
+    }, { passive: true });
 
     // Mobile Menu Toggle
     if (menuToggle) {
@@ -36,15 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Close Mobile Menu on Link Click
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            const bars = menuToggle.querySelectorAll('.bar');
+    const resetMobileToggle = () => {
+        if (!menuToggle || !navMenu) return;
+        navMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        const bars = menuToggle.querySelectorAll('.bar');
+        if (bars.length >= 3) {
             bars[0].style.transform = 'none';
             bars[1].style.opacity = '1';
             bars[2].style.transform = 'none';
-        });
+        }
+    };
+    navLinks.forEach(link => {
+        link.addEventListener('click', resetMobileToggle);
     });
+    // Close menu on Escape / viewport resize to desktop
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') resetMobileToggle();
+    });
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) resetMobileToggle();
+    }, { passive: true });
 
     // Highlight Current Section on Scroll
     function highlightNavLink() {
@@ -251,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Securing a population-scale health platform under live threat',
             summary: 'The security assessment addressed authentication and session-handling weaknesses in a national contact-tracing application, alongside backend-security decisions during rapid growth.',
             detail: 'The platform reached 50 million users in 13 days and later supported a national vaccination programme. This experience is relevant wherever a public-facing service must scale quickly while protecting identity, sessions and service continuity.',
-            image: 'images/image73.png',
+            image: 'images/image73.jpg',
             imageAlt: 'Amit Dubey speaking at a digital government event'
         },
         fraud: {
@@ -259,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Financial fraud & scam networks',
             summary: 'A public Hidden Files episode describes a fraudster taking money from a victim after accessing her WhatsApp—an example of account compromise becoming a payment-fraud event.',
             detail: 'The defensive lesson is to connect customer protection, fraud operations and technical controls: detect impersonation signals early, give people an easy way to verify a request, and interrupt risky journeys before payment is made.',
-            image: 'images/casework-financial-fraud.png',
+            image: 'images/casework-financial-fraud.jpg',
             imageAlt: 'Conceptual visualisation of payment-fraud detection',
             sourceUrl: 'https://omny.fm/shows/hidden-files-1/ep-5-whatsapp-hack-and-money-fraud-hidden-files-3',
             sourceLabel: 'Listen to the public case reference'
@@ -269,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Digital identity theft',
             summary: 'A public Hidden Files loan-app fraud episode highlights the risk of providing identity proofs to untrusted online platforms.',
             detail: 'The resilience lesson is that one login check is rarely enough. Layered identity verification, sensible session controls and clear recovery processes reduce the chance that a single compromised credential becomes a full account takeover.',
-            image: 'images/casework-identity-theft.png',
+            image: 'images/casework-identity-theft.jpg',
             imageAlt: 'Conceptual visualisation of identity protection and account takeover',
             sourceUrl: 'https://music.amazon.co.uk/podcasts/c54444e0-5daf-45de-a0cc-ef70ccb225b1/episodes/4107bce7-5a4e-424e-b1fa-5efad7b53eb7/hidden-files-ep-10-loan-app-fraud',
             sourceLabel: 'Listen to the public case reference'
@@ -279,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Corporate espionage',
             summary: 'A public Hidden Files episode, “Critical Alert”, describes an apparent IT software update that resulted in sensitive company information being leaked.',
             detail: 'For organisations, the practical outcome is an evidence-ready environment: know where sensitive information is held, monitor meaningful changes in access behaviour and retain records that allow a forensic timeline to be established.',
-            image: 'images/casework-enterprise-response.png',
+            image: 'images/casework-enterprise-response.jpg',
             imageAlt: 'Conceptual visualisation of enterprise data protection and incident response',
             sourceUrl: 'https://podcasts.apple.com/us/podcast/hidden-files/id1529394507',
             sourceLabel: 'View the Hidden Files public listing'
@@ -289,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Online extortion',
             summary: 'A public Hidden Files ransomware episode follows a business owner targeted by ransomware and the escalation that followed after the initial compromise.',
             detail: 'A resilient organisation has rehearsed who leads, what is isolated first, how decisions are documented and how it communicates with affected parties. The aim is to shorten uncertainty before an attacker dictates the pace.',
-            image: 'images/casework-enterprise-response.png',
+            image: 'images/casework-enterprise-response.jpg',
             imageAlt: 'Conceptual visualisation of enterprise ransomware incident response',
             sourceUrl: 'https://podcasts.apple.com/us/podcast/hidden-files/id1529394507',
             sourceLabel: 'View the Hidden Files public listing'
@@ -299,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Terrorism-linked cybercrime',
             summary: 'The supplied profile records terrorism-linked investigation experience, but no named public case narrative was found during this research.',
             detail: 'The applicable discipline is preserving reliable evidence while coordinating a proportionate response. Clear escalation, controlled access to evidence and accurate records help organisations support the wider investigation without compromising it.',
-            image: 'images/casework-enterprise-response.png',
+            image: 'images/casework-enterprise-response.jpg',
             imageAlt: 'Conceptual visualisation of a high-integrity cyber investigation'
         }
     };
