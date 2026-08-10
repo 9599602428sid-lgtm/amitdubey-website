@@ -844,6 +844,11 @@ h1, h2, h3, h4, h5, h6 {
         linear-gradient(160deg, color-mix(in srgb, var(--bg-dark) 92%, var(--primary) 8%), var(--bg-dark) 48%, color-mix(in srgb, var(--bg-dark) 90%, #0b1f2e 10%));
 }
 
+.casework-section > .container {
+    position: relative;
+    z-index: 2;
+}
+
 .casework-aurora {
     position: absolute;
     inset: 0;

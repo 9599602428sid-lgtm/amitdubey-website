@@ -254,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Expandable casework details + magical motion
     const caseworkModal = document.getElementById('casework-modal');
-    const caseworkButtons = document.querySelectorAll('[data-case]');
     const caseworkTitle = document.getElementById('casework-modal-title');
     const caseworkSummary = document.getElementById('casework-modal-summary');
     const caseworkDetail = document.getElementById('casework-modal-detail');
