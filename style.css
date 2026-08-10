@@ -1150,6 +1150,11 @@ h1, h2, h3, h4, h5, h6 {
     gap: 14px;
 }
 
+.casework-grid--compact {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
 .casework-card {
     position: relative;
     display: flex;
@@ -1167,6 +1172,32 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform 0.25s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
+.casework-card--compact {
+    min-height: 210px;
+    padding: 22px 20px;
+    animation: casework-card-float 7s ease-in-out infinite;
+}
+
+.casework-card--compact:nth-child(2n) {
+    animation-delay: -2.2s;
+}
+
+.casework-card--compact:nth-child(3n) {
+    animation-delay: -4.4s;
+}
+
+@keyframes casework-card-float {
+    0%, 100% { box-shadow: 0 0 0 transparent; }
+    50% { box-shadow: 0 0 28px color-mix(in srgb, var(--primary) 18%, transparent); }
+}
+
+.casework-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
 .casework-card:hover,
 .casework-card.is-tilting {
     border-color: var(--border-hover);
@@ -1181,7 +1212,7 @@ h1, h2, h3, h4, h5, h6 {
 .casework-tag {
     display: inline-flex;
     align-self: flex-start;
-    margin-top: 14px;
+    margin-top: 0;
     padding: 4px 9px;
     border-radius: 999px;
     border: 1px solid color-mix(in srgb, var(--secondary) 40%, transparent);
@@ -1192,6 +1223,7 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     background: color-mix(in srgb, var(--secondary) 12%, transparent);
+    white-space: nowrap;
 }
 
 .casework-card h3 {
@@ -1200,9 +1232,23 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.25;
 }
 
+.casework-card--compact h3 {
+    margin: 16px 0 10px;
+    font-size: 1.12rem;
+}
+
 .casework-card > p {
     font-size: 0.88rem;
     line-height: 1.55;
+}
+
+.casework-card--compact > p {
+    margin-bottom: 8px;
+    font-size: 0.86rem;
+}
+
+.casework-card--compact .casework-link {
+    margin-top: auto;
 }
 
 .casework-card-points {
@@ -1324,6 +1370,73 @@ h1, h2, h3, h4, h5, h6 {
     background: color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
+.casework-modal-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 22px 0 8px;
+}
+
+.casework-modal-metrics div {
+    padding: 14px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--bg-card-hover) 70%, transparent);
+}
+
+.casework-modal-metrics strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    line-height: 1.1;
+    text-shadow: 0 0 18px var(--primary-glow);
+}
+
+.casework-modal-metrics span {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
+.casework-modal-timeline {
+    display: grid;
+    gap: 12px;
+    counter-reset: case-step;
+}
+
+.casework-modal-timeline li {
+    position: relative;
+    padding-left: 34px;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.casework-modal-timeline li::before {
+    counter-increment: case-step;
+    content: counter(case-step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--primary) 18%, transparent);
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.casework-modal-block--playbook {
+    border-left-color: var(--primary);
+}
+
 .casework-modal-close {
     position: absolute;
     top: 18px;
@@ -1411,6 +1524,7 @@ body.casework-modal-open {
 @media (prefers-reduced-motion: reduce) {
     .casework-orb,
     .casework-spark-field,
+    .casework-card--compact,
     .casework-modal.is-open .casework-modal-panel {
         animation: none !important;
     }
@@ -2332,6 +2446,9 @@ select:focus {
     .casework-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+    .casework-grid--compact {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -2377,14 +2494,20 @@ select:focus {
     .casework-feature-content h3 {
         font-size: 1.6rem;
     }
-    .casework-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .casework-grid,
+    .casework-grid--compact {
+        grid-template-columns: 1fr;
     }
-    .casework-card {
+    .casework-card,
+    .casework-card--compact {
         min-height: 0;
+        animation: none;
     }
     .casework-highlights {
         margin-top: 14px;
+    }
+    .casework-modal-metrics {
+        grid-template-columns: 1fr;
     }
     .casework-orb {
         filter: blur(48px);

@@ -261,10 +261,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const caseworkImage = document.getElementById('casework-modal-image');
     const caseworkSourceLink = document.getElementById('casework-source-link');
     const caseworkMeta = document.getElementById('casework-modal-meta');
+    const caseworkMetrics = document.getElementById('casework-modal-metrics');
     const caseworkFindingsWrap = document.getElementById('casework-modal-findings-wrap');
     const caseworkFindings = document.getElementById('casework-modal-findings');
     const caseworkLessonsWrap = document.getElementById('casework-modal-lessons-wrap');
     const caseworkLessons = document.getElementById('casework-modal-lessons');
+    const caseworkTimelineWrap = document.getElementById('casework-modal-timeline-wrap');
+    const caseworkTimeline = document.getElementById('casework-modal-timeline');
+    const caseworkPlaybookWrap = document.getElementById('casework-modal-playbook-wrap');
+    const caseworkPlaybook = document.getElementById('casework-modal-playbook');
     const caseworkCloseButtons = document.querySelectorAll('[data-case-close]');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let previouslyFocusedCaseworkElement = null;
@@ -273,19 +278,35 @@ document.addEventListener('DOMContentLoaded', () => {
         platform: {
             label: 'National digital infrastructure',
             title: 'Hardening India’s population-scale contact-tracing platform',
-            summary: 'In a December 2020 IMPRI panel discussion, Amit Dubey publicly outlined findings from his own study of Aarogya Setu—identity-access management weaknesses, manipulable client-side verification, location spoofing risks and SSL-pinning concerns—and noted those issues were later fixed.',
-            detail: 'Aarogya Setu reached 50 million users in 13 days and later reported well over 200 million downloads (about 240 million in later government statements). The publicly relevant lesson is not vaccination delivery—that sat on CoWIN—but how a national contact-tracing service must harden authentication, sessions and client trust boundaries while under intense live scrutiny.',
-            meta: ['2020', 'Aarogya Setu study', 'Public panel findings'],
+            summary: 'In a December 2020 IMPRI panel, Amit Dubey publicly shared findings from his own study of Aarogya Setu—identity-access management gaps, manipulable client-side verification, location spoofing risks and SSL-pinning concerns—and noted those issues were later fixed.',
+            detail: 'Aarogya Setu was launched as India’s national COVID-19 contact-tracing application and scaled at extraordinary speed. The security lesson is about hardening authentication, sessions and client trust boundaries while a public platform is already under live pressure—not vaccination delivery, which ran on CoWIN.',
+            meta: ['2020', 'Aarogya Setu', 'Public study & panel brief'],
+            metrics: [
+                { value: 50, suffix: 'M', label: 'users in 13 days after launch' },
+                { value: 240, suffix: 'M+', label: 'total app downloads reported' },
+                { value: 'None', label: 'confirmed user-data breaches publicly proven' }
+            ],
+            timeline: [
+                'National contact-tracing app launches and races to mass adoption.',
+                'Dubey studies early client/server trust boundaries and identity controls.',
+                'Findings on IAM, client-side verification, location spoofing and SSL pinning are raised publicly.',
+                'Issues are reported as subsequently fixed while the platform continues to scale.'
+            ],
             findings: [
                 'Identity-access management and client-side verification could be manipulated in early versions.',
-                'Location values could be altered, weakening trust in proximity/risk signals.',
+                'Location values could be altered, weakening trust in proximity and risk signals.',
                 'SSL-pinning and related transport-trust concerns needed remediation.',
-                'Dubey emphasised confidentiality, integrity and availability while noting no proven user-data breach had been demonstrated at the time.'
+                'No confirmed user-data breach was publicly proven; credibility still depended on continuous hardening.'
             ],
             lessons: [
                 'Treat population-scale launches as continuous security programmes, not one-off audits.',
                 'Protect identity and session boundaries before growth becomes irreversible.',
-                'Publish remediation clarity under pressure—public trust is part of the control surface.'
+                'Public trust is part of the control surface—clarity under scrutiny matters.'
+            ],
+            playbook: [
+                'Threat-model authentication and session handling before feature velocity outruns review.',
+                'Pin and monitor client integrity signals that can be spoofed at scale.',
+                'Keep a public-ready remediation narrative for high-visibility national systems.'
             ],
             image: 'images/image73.jpg',
             imageAlt: 'Amit Dubey speaking at a digital government event',
@@ -296,10 +317,21 @@ document.addEventListener('DOMContentLoaded', () => {
             label: 'Hidden Files investigation',
             title: 'Financial fraud & scam networks',
             summary: 'Hidden Files 3.0 Episode 5 documents a fraudster taking money from a victim after accessing her WhatsApp—an account compromise that immediately became a payment-fraud event.',
-            detail: 'Once a messaging account is captured, attackers inherit trust: contacts believe the request, urgency feels personal, and money moves before anyone challenges the channel. The investigation theme shows how social-graph trust becomes the attack path.',
+            detail: 'Once a messaging account is captured, attackers inherit trust: contacts believe the request, urgency feels personal, and money moves before anyone challenges the channel. The investigation theme shows how the social graph itself becomes the attack path.',
             meta: ['WhatsApp compromise', 'Payment fraud', 'Hidden Files Ep. 5'],
+            metrics: [
+                { value: '1', label: 'compromised messaging channel' },
+                { value: 'Minutes', label: 'typical window before funds move' },
+                { value: 'Trust', label: 'primary control the attacker steals' }
+            ],
+            timeline: [
+                'Victim’s WhatsApp account is compromised.',
+                'Fraudster impersonates the victim to trusted contacts.',
+                'Urgent payment requests appear legitimate because they come from a known channel.',
+                'Investigation reconstructs the takeover-to-payment path for awareness and defence.'
+            ],
             findings: [
-                'Messaging-account takeover can bypass traditional banking malware.',
+                'Messaging-account takeover can bypass traditional banking malware entirely.',
                 'Trusted contacts become unwitting amplifiers of the scam.',
                 'Speed to payment is the attacker’s main advantage.'
             ],
@@ -307,6 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Connect customer protection, fraud ops and technical controls into one journey.',
                 'Detect impersonation signals early and offer an easy verification path.',
                 'Interrupt high-risk payment journeys before funds leave the account.'
+            ],
+            playbook: [
+                'Add out-of-band verification for sudden payment asks from known contacts.',
+                'Train staff and customers on channel-compromise tells, not only phishing emails.',
+                'Build friction that slows irreversible transfers without blocking normal use.'
             ],
             image: 'images/casework-financial-fraud.jpg',
             imageAlt: 'Conceptual visualisation of payment-fraud detection',
@@ -316,9 +353,20 @@ document.addEventListener('DOMContentLoaded', () => {
         identity: {
             label: 'Hidden Files investigation',
             title: 'Digital identity theft',
-            summary: 'A public Hidden Files loan-app fraud episode highlights how casually shared identity proofs and over-permissioned apps create durable identity risk, harassment paths and account-takeover potential.',
+            summary: 'A public Hidden Files loan-app fraud episode shows how casually shared identity proofs and over-permissioned apps create durable identity risk, harassment paths and account-takeover potential.',
             detail: 'Loan-app and identity-proof scams succeed because victims hand over KYC artefacts, contacts and device permissions under the pressure of urgent credit. One weak verification step then becomes a reusable identity package for the attacker.',
             meta: ['Loan-app fraud', 'KYC misuse', 'Layered identity'],
+            metrics: [
+                { value: 'KYC', label: 'artefacts commonly overshared' },
+                { value: 'Device', label: 'permissions expand the blast radius' },
+                { value: 'Layered', label: 'verification required to recover safely' }
+            ],
+            timeline: [
+                'Victim seeks urgent credit through an untrusted digital lending path.',
+                'Identity proofs and intrusive app permissions are collected.',
+                'Data is reused for harassment, impersonation or further fraud.',
+                'Recovery depends on layered verification and rapid containment.'
+            ],
             findings: [
                 'Identity documents shared with untrusted apps are hard to revoke.',
                 'Contact and media permissions expand the blackmail and social-engineering surface.',
@@ -328,6 +376,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Design layered identity verification, not a single credential gate.',
                 'Limit session lifetime and privilege after sensitive proof collection.',
                 'Give victims a clear recovery and reporting path before harassment escalates.'
+            ],
+            playbook: [
+                'Minimise KYC retention and watermark proofs where possible.',
+                'Block over-permissioned apps from high-trust journeys.',
+                'Prepare a victim recovery checklist covering bank, telecom and platform locks.'
             ],
             image: 'images/casework-identity-theft.jpg',
             imageAlt: 'Conceptual visualisation of identity protection and account takeover',
@@ -340,15 +393,31 @@ document.addEventListener('DOMContentLoaded', () => {
             summary: 'The Hidden Files episode “Critical Alert” follows Prashant after he installs what appears to be an IT software update—only for sensitive company information to leak.',
             detail: 'The deception works because the update looks operationally normal. Once trust in the IT channel is abused, data leaves quietly and the organisation discovers the breach only after business damage is already underway.',
             meta: ['Trusted-update abuse', 'Data leak', 'Critical Alert'],
+            metrics: [
+                { value: 'IT trust', label: 'channel abused by the attacker' },
+                { value: 'Silent', label: 'exfiltration before detection' },
+                { value: 'Timeline', label: 'evidence needed for response' }
+            ],
+            timeline: [
+                'Employee receives what looks like a legitimate IT software update.',
+                'The update is installed under normal operational trust.',
+                'Sensitive company information is leaked.',
+                'Investigation reconstructs who abused the trusted channel and how.'
+            ],
             findings: [
                 'Attackers can hide inside expected IT workflows such as software updates.',
                 'Sensitive data exposure may outpace detection if logging is fragmented.',
-                'Business impact arrives before attribution is clear.'
+                'Business impact often arrives before attribution is clear.'
             ],
             lessons: [
                 'Know where sensitive information lives and who can move it.',
                 'Monitor meaningful access-behaviour changes, not only perimeter alerts.',
                 'Retain records that support a forensic timeline under pressure.'
+            ],
+            playbook: [
+                'Require signed, inventory-controlled software deployment paths.',
+                'Alert on unusual bulk access to sensitive repositories.',
+                'Keep an evidence-ready logging baseline before an incident starts.'
             ],
             image: 'images/casework-enterprise-response.jpg',
             imageAlt: 'Conceptual visualisation of enterprise data protection and incident response',
@@ -361,6 +430,17 @@ document.addEventListener('DOMContentLoaded', () => {
             summary: 'The Hidden Files ransomware episode follows businessman Raghuvir after his operations are hit. Even after Amit Dubey helps crack the case, the criminal escalates surveillance and continued pressure.',
             detail: 'Ransomware is rarely only encryption. The lasting threat is decision paralysis: who leads, what is isolated first, what is communicated, and how recovery proceeds while the attacker tries to keep dictating tempo.',
             meta: ['Ransomware', 'Post-incident pressure', 'Business continuity'],
+            metrics: [
+                { value: 'Ops freeze', label: 'primary attacker leverage' },
+                { value: 'Ongoing', label: 'surveillance after first hit' },
+                { value: 'Rehearsal', label: 'best defence before the clock starts' }
+            ],
+            timeline: [
+                'Business systems are hit by ransomware and operations freeze.',
+                'Investigation and recovery work begin under pressure.',
+                'The criminal escalates surveillance and continued targeting.',
+                'Resilience depends on command, communications and controlled recovery.'
+            ],
             findings: [
                 'Operational freeze creates leverage before negotiations even begin.',
                 'Attackers may continue surveillance after the first containment steps.',
@@ -370,6 +450,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Pre-assign incident command, isolation priorities and decision logs.',
                 'Rehearse external and internal communications before an extortion clock starts.',
                 'Treat recovery as a controlled campaign, not a scramble.'
+            ],
+            playbook: [
+                'Name critical systems and offline recovery paths in advance.',
+                'Run tabletop exercises for ransom, leak and surveillance scenarios.',
+                'Document every decision so legal, PR and technical teams stay aligned.'
             ],
             image: 'images/casework-enterprise-response.jpg',
             imageAlt: 'Conceptual visualisation of enterprise ransomware incident response',
@@ -382,6 +467,17 @@ document.addEventListener('DOMContentLoaded', () => {
             summary: 'Public profile materials credit Amit Dubey with terrorism-linked cyber investigation experience and advisory work with agencies such as NIA, CBI and I4C. No named public case narrative is published here by design.',
             detail: 'In this class of work, speed cannot outrank integrity. Evidence must remain reliable, access must stay controlled, and organisational response has to support the wider investigation without contaminating it.',
             meta: ['High-integrity forensics', 'Multi-agency coordination', 'Anonymised'],
+            metrics: [
+                { value: 'Integrity', label: 'evidence standard required' },
+                { value: 'Controlled', label: 'access to sensitive material' },
+                { value: 'Proportionate', label: 'organisational escalation' }
+            ],
+            timeline: [
+                'Matter rises beyond ordinary corporate incident response.',
+                'Evidence collection and access controls are tightened immediately.',
+                'Coordination with investigation partners begins under clear escalation rules.',
+                'Organisational actions remain documented, proportionate and non-contaminating.'
+            ],
             findings: [
                 'Public bios and profile materials cite terrorism-linked cyber casework among investigated themes.',
                 'Named operational details are withheld to protect victims, methods and partner agencies.',
@@ -392,12 +488,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Use clear escalation paths when matters leave ordinary corporate incident response.',
                 'Document decisions accurately so support to agencies remains proportionate and useful.'
             ],
+            playbook: [
+                'Define when legal and external escalation must begin.',
+                'Lock evidence stores and maintain an access log.',
+                'Brief leadership on what can and cannot be shared publicly.'
+            ],
             image: 'images/casework-enterprise-response.jpg',
             imageAlt: 'Conceptual visualisation of a high-integrity cyber investigation'
         }
     };
 
-    const fillCaseworkList = (wrap, listEl, items) => {
+    const fillCaseworkList = (wrap, listEl, items, ordered = false) => {
         if (!wrap || !listEl) return;
         listEl.innerHTML = '';
         if (!items?.length) {
@@ -410,6 +511,57 @@ document.addEventListener('DOMContentLoaded', () => {
             listEl.appendChild(li);
         });
         wrap.hidden = false;
+        if (ordered) wrap.classList.add('is-ordered');
+    };
+
+    const fillCaseworkMetrics = (metrics) => {
+        if (!caseworkMetrics) return;
+        caseworkMetrics.innerHTML = '';
+        if (!metrics?.length) {
+            caseworkMetrics.hidden = true;
+            return;
+        }
+        metrics.forEach((metric) => {
+            const item = document.createElement('div');
+            const valueEl = document.createElement('strong');
+            const labelEl = document.createElement('span');
+            const numeric = typeof metric.value === 'number';
+            valueEl.textContent = numeric ? `0${metric.suffix || ''}` : String(metric.value);
+            if (numeric) {
+                valueEl.dataset.countTo = String(metric.value);
+                valueEl.dataset.countSuffix = metric.suffix || '';
+            }
+            labelEl.textContent = metric.label;
+            item.appendChild(valueEl);
+            item.appendChild(labelEl);
+            caseworkMetrics.appendChild(item);
+        });
+        caseworkMetrics.hidden = false;
+    };
+
+    const animateModalMetrics = () => {
+        if (!caseworkMetrics) return;
+        caseworkMetrics.querySelectorAll('[data-count-to]').forEach((node) => {
+            const target = Number(node.dataset.countTo);
+            const suffix = node.dataset.countSuffix || '';
+            if (!Number.isFinite(target)) {
+                node.textContent = `${node.dataset.countTo}${suffix}`;
+                return;
+            }
+            if (prefersReducedMotion) {
+                node.textContent = `${target}${suffix}`;
+                return;
+            }
+            const duration = 1200;
+            const start = performance.now();
+            const tick = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                node.textContent = `${Math.round(target * eased)}${suffix}`;
+                if (progress < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        });
     };
 
     function closeCaseworkModal() {
@@ -445,14 +597,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     caseworkMeta.hidden = true;
                 }
             }
+            fillCaseworkMetrics(content.metrics);
+            fillCaseworkList(caseworkTimelineWrap, caseworkTimeline, content.timeline, true);
             fillCaseworkList(caseworkFindingsWrap, caseworkFindings, content.findings);
             fillCaseworkList(caseworkLessonsWrap, caseworkLessons, content.lessons);
+            fillCaseworkList(caseworkPlaybookWrap, caseworkPlaybook, content.playbook);
             caseworkSourceLink.href = content.sourceUrl || '#';
             caseworkSourceLink.textContent = content.sourceLabel || '';
             caseworkSourceLink.hidden = !content.sourceUrl;
             caseworkModal.classList.add('is-open');
             caseworkModal.setAttribute('aria-hidden', 'false');
             document.body.classList.add('casework-modal-open');
+            caseworkModal.querySelector('.casework-modal-panel')?.scrollTo({ top: 0 });
+            animateModalMetrics();
             caseworkModal.querySelector('.casework-modal-close').focus();
         });
     });
@@ -462,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.key === 'Escape' && caseworkModal?.classList.contains('is-open')) closeCaseworkModal();
     });
 
-    // Casework reveal, metric count-up, and tilt "magic"
+    // Casework reveal + tilt "magic"
     const caseworkSection = document.getElementById('casework');
     const revealNodes = document.querySelectorAll('[data-casework-reveal]');
     if (caseworkSection && revealNodes.length) {
@@ -475,47 +632,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     entry.target.classList.add('is-visible');
                     observer.unobserve(entry.target);
                 });
-            }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+            }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
             revealNodes.forEach((node) => revealObserver.observe(node));
-        }
-    }
-
-    const metricNodes = document.querySelectorAll('.casework-metrics [data-count-to]');
-    let metricsAnimated = false;
-    const animateCaseworkMetrics = () => {
-        if (metricsAnimated) return;
-        metricsAnimated = true;
-        metricNodes.forEach((node) => {
-            const target = Number(node.getAttribute('data-count-to'));
-            const suffix = node.getAttribute('data-count-suffix') || '';
-            const label = node.getAttribute('data-count-label');
-            if (label) {
-                node.textContent = label;
-                return;
-            }
-            if (prefersReducedMotion || !Number.isFinite(target)) {
-                node.textContent = `${target}${suffix}`;
-                return;
-            }
-            const duration = 1400;
-            const start = performance.now();
-            const tick = (now) => {
-                const progress = Math.min((now - start) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                node.textContent = `${Math.round(target * eased)}${suffix}`;
-                if (progress < 1) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
-        });
-    };
-
-    if (metricNodes.length) {
-        const metricsObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) animateCaseworkMetrics();
+            // Guarantee first paint on short viewports / content-visibility quirks
+            requestAnimationFrame(() => {
+                revealNodes.forEach((node) => {
+                    const rect = node.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.92) node.classList.add('is-visible');
+                });
             });
-        }, { threshold: 0.4 });
-        metricsObserver.observe(metricNodes[0].closest('.casework-metrics') || metricNodes[0]);
+        }
     }
 
     if (!prefersReducedMotion) {
@@ -524,8 +650,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = card.getBoundingClientRect();
                 const x = (event.clientX - rect.left) / rect.width;
                 const y = (event.clientY - rect.top) / rect.height;
-                const rotateY = (x - 0.5) * 8;
-                const rotateX = (0.5 - y) * 8;
+                const rotateY = (x - 0.5) * 10;
+                const rotateX = (0.5 - y) * 10;
                 card.style.setProperty('--tilt-x', `${rotateX.toFixed(2)}deg`);
                 card.style.setProperty('--tilt-y', `${rotateY.toFixed(2)}deg`);
                 card.style.setProperty('--shine-x', `${(x * 100).toFixed(1)}%`);
