@@ -275,226 +275,209 @@ document.addEventListener('DOMContentLoaded', () => {
     let previouslyFocusedCaseworkElement = null;
 
     const caseworkContent = {
-        platform: {
-            label: 'National digital infrastructure',
-            title: 'Hardening India’s population-scale contact-tracing platform',
-            summary: 'In a December 2020 IMPRI panel, Amit Dubey publicly shared findings from his own study of Aarogya Setu—identity-access management gaps, manipulable client-side verification, location spoofing risks and SSL-pinning concerns—and noted those issues were later fixed.',
-            detail: 'Aarogya Setu was launched as India’s national COVID-19 contact-tracing application and scaled at extraordinary speed. The security lesson is about hardening authentication, sessions and client trust boundaries while a public platform is already under live pressure—not vaccination delivery, which ran on CoWIN.',
-            meta: ['2020', 'Aarogya Setu', 'Public study & panel brief'],
+        kidnapping: {
+            label: 'Case study 01 · National security & VIP extortion',
+            title: 'The Independence Day eve kidnapping & cyber ransom',
+            summary: 'On 14 August—on the eve of India’s Independence Day—Balwant Singh, a senior public-sector executive, vanished. Hours later his spouse received an anonymous ₹2 crore extortion demand delivered through burner mobiles and spoofed VoIP gateways.',
+            detail: 'The high-profile abduction left zero physical clues and threatened national-security reputations because of the timing and status of the official. Traditional CDR analysis failed: perpetrators switched SIM cards and handsets after short 15-second transmissions.',
+            meta: ['VIP kidnapping', '₹2 crore ransom', 'CBI & State Cyber Cell'],
             metrics: [
-                { value: 50, suffix: 'M', label: 'users in 13 days after launch' },
-                { value: 240, suffix: 'M+', label: 'total app downloads reported' },
-                { value: 'None', label: 'confirmed user-data breaches publicly proven' }
+                { value: '₹2 Cr', label: 'extortion demand' },
+                { value: 14, label: 'cell towers correlated' },
+                { value: '200m', label: 'final search-grid radius' }
             ],
             timeline: [
-                'National contact-tracing app launches and races to mass adoption.',
-                'Dubey studies early client/server trust boundaries and identity controls.',
-                'Findings on IAM, client-side verification, location spoofing and SSL pinning are raised publicly.',
-                'Issues are reported as subsequently fixed while the platform continues to scale.'
+                'Cell tower dump correlation: extracted logs from 14 towers along the suspected movement vector, isolating overlapping active handset identifiers (IMEI ∩ IMSI).',
+                'Handset handoff latency: calculated signal propagation delays between base transceiver stations to determine vehicle velocity and route trajectory.',
+                'Voice-over-IP decryption: identified an unencrypted SIP trunk session used for one ransom call and resolved the originating public IP to a rogue proxy in a neighbouring district.',
+                'Multi-tower CDR triangulation and BTS timing-advance mapping narrowed the hideout in real time.'
             ],
             findings: [
-                'Identity-access management and client-side verification could be manipulated in early versions.',
-                'Location values could be altered, weakening trust in proximity and risk signals.',
-                'SSL-pinning and related transport-trust concerns needed remediation.',
-                'No confirmed user-data breach was publicly proven; credibility still depended on continuous hardening.'
+                'Ground tactical teams raided the hideout before the Independence Day deadline.',
+                'Balwant Singh was safely rescued.',
+                'All three members of the armed gang were arrested.'
             ],
             lessons: [
-                'Treat population-scale launches as continuous security programmes, not one-off audits.',
-                'Protect identity and session boundaries before growth becomes irreversible.',
-                'Public trust is part of the control surface—clarity under scrutiny matters.'
+                'Shifting from static phone-number tracking to dynamic BTS timing-advance analysis bypassed the criminals’ handset-swapping evasion tactic.'
             ],
             playbook: [
-                'Threat-model authentication and session handling before feature velocity outruns review.',
-                'Pin and monitor client integrity signals that can be spoofed at scale.',
-                'Keep a public-ready remediation narrative for high-visibility national systems.'
+                'Target / victim: Balwant Singh (Director, Public Sector Undertaking)',
+                'Primary crime: VIP kidnapping, high-stakes extortion & ransom demand (₹2 crore)',
+                'Investigating bodies: Central Bureau of Investigation (CBI) & State Cyber Cell',
+                'Key technical tools: CDR/IPDR tower-dump triangulation, IMEI masking decryption, geo-fencing'
             ],
-            image: 'images/image73.jpg',
-            imageAlt: 'Amit Dubey speaking at a digital government event',
-            sourceUrl: 'https://www.counterview.net/2020/12/concern-over-fall-in-penetration-in.html',
-            sourceLabel: 'Read the public panel reference'
+            image: 'images/casework-enterprise-response.jpg',
+            imageAlt: 'Conceptual visualisation of telecom triangulation and VIP extortion response'
         },
-        fraud: {
-            label: 'Hidden Files investigation',
-            title: 'Financial fraud & scam networks',
-            summary: 'Hidden Files 3.0 Episode 5 documents a fraudster taking money from a victim after accessing her WhatsApp—an account compromise that immediately became a payment-fraud event.',
-            detail: 'Once a messaging account is captured, attackers inherit trust: contacts believe the request, urgency feels personal, and money moves before anyone challenges the channel. The investigation theme shows how the social graph itself becomes the attack path.',
-            meta: ['WhatsApp compromise', 'Payment fraud', 'Hidden Files Ep. 5'],
+        coldcase: {
+            label: 'Case study 02 · Cold case & AI profiling',
+            title: 'Cracking the 19-year-old unsolved homicide via AI forensics',
+            summary: 'A brutal homicide from 19 years earlier remained unsolved. The primary suspect had vanished, leaving only a single low-resolution grainy identity-card photograph. Manual distribution of the image yielded zero leads for nearly two decades.',
+            detail: 'Primitive surveillance and broken eye-witness continuity had frozen the case. Amit Dubey revitalised it with AI facial aging, neural super-resolution and cross-database biometric vector search.',
+            meta: ['Cold case homicide', '19 years unresolved', 'AI facial embeddings'],
             metrics: [
-                { value: '1', label: 'compromised messaging channel' },
-                { value: 'Minutes', label: 'typical window before funds move' },
-                { value: 'Trust', label: 'primary control the attacker steals' }
+                { value: 19, suffix: ' yrs', label: 'cold before breakthrough' },
+                { value: '99.4%', label: 'structural biometric match' },
+                { value: '512-D', label: 'facial embedding space' }
             ],
             timeline: [
-                'Victim’s WhatsApp account is compromised.',
-                'Fraudster impersonates the victim to trusted contacts.',
-                'Urgent payment requests appear legitimate because they come from a known channel.',
-                'Investigation reconstructs the takeover-to-payment path for awareness and defence.'
+                'AI facial aging & feature projection: generated age-progressed 3D biometric mesh renders simulating 19 years of facial aging, bone-density change and hair thinning.',
+                'Resolution enhancement: deployed GANs to reconstruct high-frequency facial landmarks from a pixelated ~150×150 source photo.',
+                'Automated database scraping & vector search: converted profiles into 512-dimensional facial embeddings and ran similarity comparisons against newly digitised public registration databases.',
+                'A cosine-distance hit (distance < 0.12) flagged a candidate living under a forged identity in another state.'
             ],
             findings: [
-                'Messaging-account takeover can bypass traditional banking malware entirely.',
-                'Trusted contacts become unwitting amplifiers of the scam.',
-                'Speed to payment is the attacker’s main advantage.'
+                'Biometric verification confirmed a 99.4% structural match.',
+                'The suspect was arrested while living under an assumed identity.',
+                'He confessed to the 19-year-old murder.'
             ],
             lessons: [
-                'Connect customer protection, fraud ops and technical controls into one journey.',
-                'Detect impersonation signals early and offer an easy verification path.',
-                'Interrupt high-risk payment journeys before funds leave the account.'
+                'Modern AI facial vector embeddings can transcend physical aging and low image resolution to reopen dormant cold cases.'
             ],
             playbook: [
-                'Add out-of-band verification for sudden payment asks from known contacts.',
-                'Train staff and customers on channel-compromise tells, not only phishing emails.',
-                'Build friction that slows irreversible transfers without blocking normal use.'
-            ],
-            image: 'images/casework-financial-fraud.jpg',
-            imageAlt: 'Conceptual visualisation of payment-fraud detection',
-            sourceUrl: 'https://omny.fm/shows/hidden-files-1/ep-5-whatsapp-hack-and-money-fraud-hidden-files-3',
-            sourceLabel: 'Listen to the public case reference'
-        },
-        identity: {
-            label: 'Hidden Files investigation',
-            title: 'Digital identity theft',
-            summary: 'A public Hidden Files loan-app fraud episode shows how casually shared identity proofs and over-permissioned apps create durable identity risk, harassment paths and account-takeover potential.',
-            detail: 'Loan-app and identity-proof scams succeed because victims hand over KYC artefacts, contacts and device permissions under the pressure of urgent credit. One weak verification step then becomes a reusable identity package for the attacker.',
-            meta: ['Loan-app fraud', 'KYC misuse', 'Layered identity'],
-            metrics: [
-                { value: 'KYC', label: 'artefacts commonly overshared' },
-                { value: 'Device', label: 'permissions expand the blast radius' },
-                { value: 'Layered', label: 'verification required to recover safely' }
-            ],
-            timeline: [
-                'Victim seeks urgent credit through an untrusted digital lending path.',
-                'Identity proofs and intrusive app permissions are collected.',
-                'Data is reused for harassment, impersonation or further fraud.',
-                'Recovery depends on layered verification and rapid containment.'
-            ],
-            findings: [
-                'Identity documents shared with untrusted apps are hard to revoke.',
-                'Contact and media permissions expand the blackmail and social-engineering surface.',
-                'A single login check rarely stops account takeover after documents leak.'
-            ],
-            lessons: [
-                'Design layered identity verification, not a single credential gate.',
-                'Limit session lifetime and privilege after sensitive proof collection.',
-                'Give victims a clear recovery and reporting path before harassment escalates.'
-            ],
-            playbook: [
-                'Minimise KYC retention and watermark proofs where possible.',
-                'Block over-permissioned apps from high-trust journeys.',
-                'Prepare a victim recovery checklist covering bank, telecom and platform locks.'
+                'Crime category: cold-case homicide / murder investigation',
+                'Time lapse: 19 years cold (unresolved since mid-2000s)',
+                'Technology applied: AI facial aging reconstruction, neural-network super-resolution, cross-database matching',
+                'Outcome: identification and apprehension of the prime suspect living under an assumed identity'
             ],
             image: 'images/casework-identity-theft.jpg',
-            imageAlt: 'Conceptual visualisation of identity protection and account takeover',
-            sourceUrl: 'https://music.amazon.co.uk/podcasts/c54444e0-5daf-45de-a0cc-ef70ccb225b1/episodes/4107bce7-5a4e-424e-b1fa-5efad7b53eb7/hidden-files-ep-10-loan-app-fraud',
-            sourceLabel: 'Listen to the public case reference'
+            imageAlt: 'Conceptual visualisation of AI facial aging and biometric matching'
         },
-        espionage: {
-            label: 'Hidden Files investigation',
-            title: 'Corporate espionage',
-            summary: 'The Hidden Files episode “Critical Alert” follows Prashant after he installs what appears to be an IT software update—only for sensitive company information to leak.',
-            detail: 'The deception works because the update looks operationally normal. Once trust in the IT channel is abused, data leaves quietly and the organisation discovers the breach only after business damage is already underway.',
-            meta: ['Trusted-update abuse', 'Data leak', 'Critical Alert'],
+        banking: {
+            label: 'Case study 03 · Financial malware & banking fraud',
+            title: 'The ₹82 lakh unsolicited-call financial drain',
+            summary: 'A high-net-worth victim answered a brief incoming phone call, then noticed minor screen flickering. Within hours, ₹82 lakhs was drained across 24 rapid RTGS/NEFT transactions—without OTP disclosure or visible SMS alerts.',
+            detail: 'No explicit phishing link had been clicked, raising panic about a cellular exploit. Deep mobile memory forensics revealed a covert Remote Access Trojan woken by the call, intercepting bank OTPs and deleting local SMS evidence.',
+            meta: ['Mobile RAT', '₹82 lakh loss', '140 mule accounts'],
             metrics: [
-                { value: 'IT trust', label: 'channel abused by the attacker' },
-                { value: 'Silent', label: 'exfiltration before detection' },
-                { value: 'Timeline', label: 'evidence needed for response' }
+                { value: 82, suffix: 'L', label: 'rupees drained from victim' },
+                { value: 24, label: 'rapid RTGS/NEFT transfers' },
+                { value: 54, suffix: 'L', label: 'rupees recovered' }
             ],
             timeline: [
-                'Employee receives what looks like a legitimate IT software update.',
-                'The update is installed under normal operational trust.',
-                'Sensitive company information is leaked.',
-                'Investigation reconstructs who abused the trusted channel and how.'
+                'RAM & storage memory dump: recovered a covert Android RAT pre-installed via a malicious SMS payload masquerading as a carrier update.',
+                'Trigger analysis: the inbound call acted as a wake-up signal for a dormant Trojan that elevated privileges through an OS accessibility API exploit.',
+                'SMS & notification interception: malware hid bank OTP messages, forwarded them over encrypted MQTT to a C2 server, then deleted local SMS logs.',
+                'Financial mule tracing: mapped dispersion of ₹82 lakhs across 140 layered mule accounts within 45 minutes using graph analysis.'
             ],
             findings: [
-                'Attackers can hide inside expected IT workflows such as software updates.',
-                'Sensitive data exposure may outpace detection if logging is fragmented.',
-                'Business impact often arrives before attribution is clear.'
+                'Automated freeze requests to destination banks were issued inside the investigative window.',
+                'C2 traffic decryption helped dismantle a syndicate operating across three states.',
+                '₹54 lakhs was recovered for the victim.'
             ],
             lessons: [
-                'Know where sensitive information lives and who can move it.',
-                'Monitor meaningful access-behaviour changes, not only perimeter alerts.',
-                'Retain records that support a forensic timeline under pressure.'
+                'Accessibility API abuse on mobile devices, combined with fast-track banking liens, is decisive against zero/one-click RAT fraud.'
             ],
             playbook: [
-                'Require signed, inventory-controlled software deployment paths.',
-                'Alert on unusual bulk access to sensitive repositories.',
-                'Keep an evidence-ready logging baseline before an incident starts.'
+                'Financial loss: ₹82 lakhs ($100,000+ USD equivalent)',
+                'Attack vector: zero-click / one-click mobile RAT malware',
+                'Modus operandi: phone-call trigger → background APK payload → OTP interception',
+                'Forensic field: mobile firmware analysis, reverse engineering, banking mule tracking'
             ],
-            image: 'images/casework-enterprise-response.jpg',
-            imageAlt: 'Conceptual visualisation of enterprise data protection and incident response',
-            sourceUrl: 'https://omny.fm/shows/hidden-files-1/critical-alert',
-            sourceLabel: 'Listen to Critical Alert'
+            image: 'images/casework-financial-fraud.jpg',
+            imageAlt: 'Conceptual visualisation of banking malware and mule-account tracing'
         },
-        extortion: {
-            label: 'Hidden Files investigation',
-            title: 'Online extortion',
-            summary: 'The Hidden Files ransomware episode follows businessman Raghuvir after his operations are hit. Even after Amit Dubey helps crack the case, the criminal escalates surveillance and continued pressure.',
-            detail: 'Ransomware is rarely only encryption. The lasting threat is decision paralysis: who leads, what is isolated first, what is communicated, and how recovery proceeds while the attacker tries to keep dictating tempo.',
-            meta: ['Ransomware', 'Post-incident pressure', 'Business continuity'],
+        sextortion: {
+            label: 'Case study 04 · Cyber extortion & darknet profiling',
+            title: 'The anonymized sextortion & digital blackmail network',
+            summary: 'A young female student was targeted by an anonymous blackmailer who possessed compromising private media and demanded recurring payments under threat of public release.',
+            detail: 'The attacker used virtual numbers, Tor routing and dynamic Telegram channels, making traditional IP tracking ineffective. Dubey shifted to socio-technical profiling and behavioural digital forensics.',
+            meta: ['Sextortion', 'Tor & VPN', 'Browser fingerprinting'],
             metrics: [
-                { value: 'Ops freeze', label: 'primary attacker leverage' },
-                { value: 'Ongoing', label: 'surveillance after first hit' },
-                { value: 'Rehearsal', label: 'best defence before the clock starts' }
+                { value: 'Tor', label: 'anonymity layer bypassed' },
+                { value: 'Stylometry', label: 'writing-signature match' },
+                { value: 'Canary', label: 'device fingerprint capture' }
             ],
             timeline: [
-                'Business systems are hit by ransomware and operations freeze.',
-                'Investigation and recovery work begin under pressure.',
-                'The criminal escalates surveillance and continued targeting.',
-                'Resilience depends on command, communications and controlled recovery.'
+                'Linguistic & stylometric profiling: analysed punctuation, typing rhythm, slang and spelling errors to build a unique writing signature.',
+                'Honey-token / tracking canary: crafted a custom payment-confirmation link carrying an embedded pixel payload.',
+                'Device artefact capture: when opened, the payload performed zero-privilege browser fingerprinting—canvas hashes, WebGL vendor ID, timezone and battery-status readings.',
+                'Digital footprint cross-referencing: correlated captured device parameters with local historical logs, matching an acquaintance of the victim.'
             ],
             findings: [
-                'Operational freeze creates leverage before negotiations even begin.',
-                'Attackers may continue surveillance after the first containment steps.',
-                'Unrehearsed communications amplify uncertainty and secondary harm.'
+                'The perpetrator was identified as a close acquaintance who had briefly accessed the victim’s unencrypted secondary device months earlier.',
+                'The suspect was apprehended.',
+                'All primary digital copies were confiscated and destroyed.'
             ],
             lessons: [
-                'Pre-assign incident command, isolation priorities and decision logs.',
-                'Rehearse external and internal communications before an extortion clock starts.',
-                'Treat recovery as a controlled campaign, not a scramble.'
+                'Human behavioural markers and browser-layer device fingerprinting can breach multi-layer VPN and proxy anonymity when network tracing fails.'
             ],
             playbook: [
-                'Name critical systems and offline recovery paths in advance.',
-                'Run tabletop exercises for ransom, leak and surveillance scenarios.',
-                'Document every decision so legal, PR and technical teams stay aligned.'
+                'Crime category: digital blackmail, sextortion & privacy breach',
+                'Anonymity layers: VPN tunnelling, Tor network, encrypted messaging (Telegram)',
+                'Forensic approach: OSINT, stylometry, digital-footprint correlation',
+                'Public archive: featured in Live Hindustan & RedFM Hidden Files case archives'
             ],
-            image: 'images/casework-enterprise-response.jpg',
-            imageAlt: 'Conceptual visualisation of enterprise ransomware incident response',
-            sourceUrl: 'https://omny.fm/shows/hidden-files-1/ransomware',
-            sourceLabel: 'Listen to the ransomware case'
+            image: 'images/casework-identity-theft.jpg',
+            imageAlt: 'Conceptual visualisation of darknet profiling and digital blackmail response'
         },
-        terrorism: {
-            label: 'Agency-supported investigation theme',
-            title: 'Terrorism-linked cybercrime',
-            summary: 'Public profile materials credit Amit Dubey with terrorism-linked cyber investigation experience and advisory work with agencies such as NIA, CBI and I4C. No named public case narrative is published here by design.',
-            detail: 'In this class of work, speed cannot outrank integrity. Evidence must remain reliable, access must stay controlled, and organisational response has to support the wider investigation without contaminating it.',
-            meta: ['High-integrity forensics', 'Multi-agency coordination', 'Anonymised'],
+        identity: {
+            label: 'Case study 05 · Identity theft & financial impersonation',
+            title: 'The deceased man’s digital identity bank heist',
+            summary: 'A family discovered that their deceased relative’s bank savings—untouched for 2.5 years after death—had been systematically drained through online transfers authenticated with valid OTPs and re-verified KYC documents.',
+            detail: 'The perplexing question: how could a deceased individual execute modern digital banking? Historical telecom and banking-ledger analysis exposed recycled SIMs, obituary targeting and forged e-KYC resets.',
+            meta: ['Post-mortem ID theft', 'SIM recycling', 'e-KYC hijack'],
             metrics: [
-                { value: 'Integrity', label: 'evidence standard required' },
-                { value: 'Controlled', label: 'access to sensitive material' },
-                { value: 'Proportionate', label: 'organisational escalation' }
+                { value: '2.5 yrs', label: 'after account holder’s death' },
+                { value: 'SIM', label: 'number deliberately re-acquired' },
+                { value: 'Policy', label: 'banking guideline changes prompted' }
             ],
             timeline: [
-                'Matter rises beyond ordinary corporate incident response.',
-                'Evidence collection and access controls are tightened immediately.',
-                'Coordination with investigation partners begins under clear escalation rules.',
-                'Organisational actions remain documented, proportionate and non-contaminating.'
+                'SIM lifecycle analysis: telecom operators re-allocated deactivated numbers after inactivity; the criminal targeted obituaries and matched names to leaked banking databases.',
+                'Re-allocated SIM acquisition: the fraudster deliberately obtained the mobile number formerly owned by the deceased.',
+                'Forged e-KYC hijack: using forged Aadhaar modifications, the attacker requested a mobile-banking password reset and received OTPs on the re-issued SIM.',
+                'Findings exposed a systemic vulnerability in telecom number re-allocation protocols.'
             ],
             findings: [
-                'Public bios and profile materials cite terrorism-linked cyber casework among investigated themes.',
-                'Named operational details are withheld to protect victims, methods and partner agencies.',
-                'The transferable organisational value is process discipline under elevated stakes.'
+                'The investigation forced recognition of recycled-number risk in digital banking.',
+                'Updated banking guidelines were prompted to require death-registry cross-verification before mobile-banking reactivation on dormant accounts.',
+                'The case is detailed in Hidden Files with IPS Prof. Triveni Singh.'
             ],
             lessons: [
-                'Preserve chain-of-custody and controlled evidence access from the first hour.',
-                'Use clear escalation paths when matters leave ordinary corporate incident response.',
-                'Document decisions accurately so support to agencies remains proportionate and useful.'
+                'Security risks in recycled cellular numbers demand structural policy change in e-KYC re-authentication—not only case-by-case freezes.'
             ],
             playbook: [
-                'Define when legal and external escalation must begin.',
-                'Lock evidence stores and maintain an access log.',
-                'Brief leadership on what can and cannot be shared publicly.'
+                'Anomaly type: post-mortem identity theft & synthetic credential fraud',
+                'Time post-demise: 2.5 years after the account holder’s death',
+                'Primary vector: SIM-swap / recycled-number fraud, e-KYC exploitation, bank portal bypass',
+                'Co-author reference: detailed in Hidden Files with IPS Prof. Triveni Singh'
+            ],
+            image: 'images/casework-financial-fraud.jpg',
+            imageAlt: 'Conceptual visualisation of post-mortem identity theft and e-KYC fraud'
+        },
+        youth: {
+            label: 'Case study 06 · Youth cybercrime & ransomware',
+            title: 'The 14-year-old cyber prodigy & institutional extortion',
+            summary: 'A major educational board and administrative server network suffered persistent disruptions, database corruption and extortion threats. Attack patterns looked sophisticated enough that authorities suspected an international state-sponsored adversary.',
+            detail: 'Packet captures and server logs told a different story: TTL values, TCP window sizes and code artefacts pointed to a local residential broadband connection—and a 14-year-old student operating from a bedroom with an unpatched home router.',
+            meta: ['Juvenile hacker', 'Institutional extortion', 'Ethical rehab'],
+            metrics: [
+                { value: 14, label: 'year-old self-taught perpetrator' },
+                { value: 'Local ISP', label: 'origin vs suspected nation-state' },
+                { value: 'Rehab', label: 'resolution over incarceration' }
+            ],
+            timeline: [
+                'Packet TTL & subnet profiling: IP TTL values and TCP window sizes showed attacks originated from a local residential broadband ISP, not an overseas server farm.',
+                'Code artefact analysis: decompiled custom Python exploit scripts; comments contained gaming handles and anime-culture references.',
+                'OSINT reconnaissance: traced handles across Discord and GitHub forums to a 14-year-old student.',
+                'Technical neutralization followed by advocacy for constructive legal diversion into ethical hacking mentorship.'
+            ],
+            findings: [
+                'The threat actor was a juvenile operating from home infrastructure, not a nation-state unit.',
+                'Systems were technically neutralized.',
+                'Dubey advocated redirecting the juvenile into ethical hacking mentorship and cyber-defence training rather than traditional incarceration.'
+            ],
+            lessons: [
+                'Deep packet inspection and source-code artefact analysis can distinguish nation-state theatre from localised juvenile talent—and change the justice outcome.'
+            ],
+            playbook: [
+                'Perpetrator profile: 14-year-old self-taught hacker',
+                'Target systems: educational institutions & regional government servers',
+                'Technique used: DDoS, SQL injection, custom Python ransomware scripts',
+                'Resolution strategy: technical neutralization & ethical rehabilitation protocol'
             ],
             image: 'images/casework-enterprise-response.jpg',
-            imageAlt: 'Conceptual visualisation of a high-integrity cyber investigation'
+            imageAlt: 'Conceptual visualisation of youth cybercrime investigation and institutional response'
         }
     };
 

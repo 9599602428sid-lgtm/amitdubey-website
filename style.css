@@ -923,6 +923,39 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
 
+.casework-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 0 0 34px;
+}
+
+.casework-stats div {
+    padding: 18px 16px;
+    border: 1px solid color-mix(in srgb, var(--border-color) 70%, var(--primary) 30%);
+    border-radius: 14px;
+    background:
+        linear-gradient(160deg, color-mix(in srgb, var(--bg-card) 92%, transparent), color-mix(in srgb, var(--bg-card-hover) 70%, transparent));
+    text-align: center;
+    backdrop-filter: blur(8px);
+}
+
+.casework-stats strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    line-height: 1.1;
+    text-shadow: 0 0 16px var(--primary-glow);
+}
+
+.casework-stats span {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
 .casework-reveal {
     opacity: 0;
     transform: translateY(28px) scale(0.985);
@@ -2493,6 +2526,9 @@ select:focus {
     }
     .casework-feature-content h3 {
         font-size: 1.6rem;
+    }
+    .casework-stats {
+        grid-template-columns: repeat(2, 1fr);
     }
     .casework-grid,
     .casework-grid--compact {
