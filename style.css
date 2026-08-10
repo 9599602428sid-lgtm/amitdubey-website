@@ -61,7 +61,6 @@ ul {
 .benefits-section,
 .timeline-section,
 .gallery-section,
-.casework-section,
 .media-section,
 .diagnostic-section,
 .consultation-section {
@@ -930,7 +929,13 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 0 34px;
 }
 
-.casework-stats div {
+.casework-stats div,
+.casework-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     padding: 18px 16px;
     border: 1px solid color-mix(in srgb, var(--border-color) 70%, var(--primary) 30%);
     border-radius: 14px;
@@ -940,17 +945,22 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(8px);
 }
 
-.casework-stats strong {
+.casework-stats strong,
+.casework-stat strong {
     display: block;
-    margin-bottom: 6px;
+    width: 100%;
+    margin: 0;
     color: var(--primary);
     font-family: var(--font-heading);
     font-size: 1.45rem;
-    line-height: 1.1;
+    line-height: 1.15;
     text-shadow: 0 0 16px var(--primary-glow);
 }
 
-.casework-stats span {
+.casework-stats span,
+.casework-stat span {
+    display: block;
+    width: 100%;
     color: var(--text-secondary);
     font-size: 0.78rem;
     line-height: 1.35;

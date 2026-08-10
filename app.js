@@ -555,46 +555,63 @@ document.addEventListener('DOMContentLoaded', () => {
         previouslyFocusedCaseworkElement?.focus();
     }
 
-    caseworkButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const content = caseworkContent[button.dataset.case];
-            if (!content || !caseworkModal) return;
-            previouslyFocusedCaseworkElement = button;
-            document.getElementById('casework-modal-label').textContent = content.label;
-            caseworkTitle.textContent = content.title;
-            caseworkSummary.textContent = content.summary;
-            caseworkDetail.textContent = content.detail;
-            caseworkImage.src = content.image;
-            caseworkImage.alt = content.imageAlt;
+    const openCaseworkModal = (caseId, triggerButton = null) => {
+        const content = caseworkContent[caseId];
+        if (!content || !caseworkModal) return false;
+        previouslyFocusedCaseworkElement = triggerButton;
+        const labelEl = document.getElementById('casework-modal-label');
+        if (labelEl) labelEl.textContent = content.label;
+        if (caseworkTitle) caseworkTitle.textContent = content.title;
+        if (caseworkSummary) caseworkSummary.textContent = content.summary;
+        if (caseworkDetail) caseworkDetail.textContent = content.detail;
+        if (caseworkImage) {
+            caseworkImage.src = content.image || '';
+            caseworkImage.alt = content.imageAlt || '';
             caseworkImage.hidden = !content.image;
-            if (caseworkMeta) {
-                caseworkMeta.innerHTML = '';
-                if (content.meta?.length) {
-                    content.meta.forEach((chip) => {
-                        const span = document.createElement('span');
-                        span.textContent = chip;
-                        caseworkMeta.appendChild(span);
-                    });
-                    caseworkMeta.hidden = false;
-                } else {
-                    caseworkMeta.hidden = true;
-                }
+        }
+        if (caseworkMeta) {
+            caseworkMeta.innerHTML = '';
+            if (content.meta?.length) {
+                content.meta.forEach((chip) => {
+                    const span = document.createElement('span');
+                    span.textContent = chip;
+                    caseworkMeta.appendChild(span);
+                });
+                caseworkMeta.hidden = false;
+            } else {
+                caseworkMeta.hidden = true;
             }
-            fillCaseworkMetrics(content.metrics);
-            fillCaseworkList(caseworkTimelineWrap, caseworkTimeline, content.timeline, true);
-            fillCaseworkList(caseworkFindingsWrap, caseworkFindings, content.findings);
-            fillCaseworkList(caseworkLessonsWrap, caseworkLessons, content.lessons);
-            fillCaseworkList(caseworkPlaybookWrap, caseworkPlaybook, content.playbook);
-            caseworkSourceLink.href = content.sourceUrl || '#';
-            caseworkSourceLink.textContent = content.sourceLabel || '';
-            caseworkSourceLink.hidden = !content.sourceUrl;
-            caseworkModal.classList.add('is-open');
-            caseworkModal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('casework-modal-open');
-            caseworkModal.querySelector('.casework-modal-panel')?.scrollTo({ top: 0 });
-            animateModalMetrics();
-            caseworkModal.querySelector('.casework-modal-close').focus();
-        });
+        }
+        fillCaseworkMetrics(content.metrics);
+        fillCaseworkList(caseworkTimelineWrap, caseworkTimeline, content.timeline, true);
+        fillCaseworkList(caseworkFindingsWrap, caseworkFindings, content.findings);
+        fillCaseworkList(caseworkLessonsWrap, caseworkLessons, content.lessons);
+        fillCaseworkList(caseworkPlaybookWrap, caseworkPlaybook, content.playbook);
+        if (caseworkSourceLink) {
+            if (content.sourceUrl) {
+                caseworkSourceLink.href = content.sourceUrl;
+                caseworkSourceLink.textContent = content.sourceLabel || 'View public reference';
+                caseworkSourceLink.hidden = false;
+            } else {
+                caseworkSourceLink.removeAttribute('href');
+                caseworkSourceLink.textContent = '';
+                caseworkSourceLink.hidden = true;
+            }
+        }
+        caseworkModal.classList.add('is-open');
+        caseworkModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('casework-modal-open');
+        caseworkModal.querySelector('.casework-modal-panel')?.scrollTo({ top: 0 });
+        animateModalMetrics();
+        caseworkModal.querySelector('.casework-modal-close')?.focus();
+        return true;
+    };
+
+    document.addEventListener('click', (event) => {
+        const trigger = event.target.closest('[data-case]');
+        if (!trigger) return;
+        event.preventDefault();
+        openCaseworkModal(trigger.getAttribute('data-case'), trigger);
     });
 
     caseworkCloseButtons.forEach(button => button.addEventListener('click', closeCaseworkModal));
