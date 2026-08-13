@@ -261,11 +261,21 @@ export function InvestigationForm() {
     for (const [k, v] of Object.entries(entries)) data.set(k, v);
     for (const file of files) data.append("files", file);
 
-    const response = await submitInvestigation(data);
-    setSubmitting(false);
-    setResult(response);
-    if (response.ok) {
-      localStorage.removeItem(DRAFT_KEY);
+    try {
+      const response = await submitInvestigation(data);
+      setResult(response);
+      if (response.ok) {
+        localStorage.removeItem(DRAFT_KEY);
+      }
+    } catch (error) {
+      console.error(error);
+      setResult({
+        ok: false,
+        code: "ERROR",
+        message: copy.form.errorGeneric,
+      });
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -301,7 +311,7 @@ export function InvestigationForm() {
     <form className="inv-form" onSubmit={onSubmit} noValidate>
       <ol className="inv-progress" aria-label="Form steps">
         {copy.form.steps.map((label, index) => (
-          <li key={label} data-active={draft.step === index + 1}>
+          <li key={label} data-active={draft.step === index + 1} data-step={String(index + 1)}>
             {index + 1}. {label}
           </li>
         ))}

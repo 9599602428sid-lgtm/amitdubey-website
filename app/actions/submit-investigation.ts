@@ -26,37 +26,37 @@ function formRecord(formData: FormData): Record<string, unknown> {
 }
 
 export async function submitInvestigation(formData: FormData): Promise<SubmitResult> {
-  const hdrs = await headers();
-  const ip =
-    hdrs.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    hdrs.get("x-real-ip") ||
-    "unknown";
-
-  const limit = await checkRateLimit(ip);
-  if (!limit.ok) {
-    return { ok: false, code: "RATE", message: "Too many attempts. Please wait and try again." };
-  }
-
-  const parsed = validateSubmission(formRecord(formData));
-  if (!parsed.ok) {
-    return {
-      ok: false,
-      code: parsed.code,
-      message: parsed.message,
-      issues: parsed.issues,
-    };
-  }
-
-  const incoming = formData.getAll("files").filter((f): f is File => f instanceof File && f.size > 0);
-  const fileIssues = validateFiles(incoming.map((f) => ({ name: f.name, type: f.type, size: f.size })));
-  if (fileIssues.length) {
-    return { ok: false, code: "UPLOAD", message: fileIssues[0].message, issues: fileIssues };
-  }
-  if (incoming.length > MAX_FILES) {
-    return { ok: false, code: "UPLOAD", message: `You can upload at most ${MAX_FILES} files.` };
-  }
-
   try {
+    const hdrs = await headers();
+    const ip =
+      hdrs.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      hdrs.get("x-real-ip") ||
+      "unknown";
+
+    const limit = await checkRateLimit(ip);
+    if (!limit.ok) {
+      return { ok: false, code: "RATE", message: "Too many attempts. Please wait and try again." };
+    }
+
+    const parsed = validateSubmission(formRecord(formData));
+    if (!parsed.ok) {
+      return {
+        ok: false,
+        code: parsed.code,
+        message: parsed.message,
+        issues: parsed.issues,
+      };
+    }
+
+    const incoming = formData.getAll("files").filter((f): f is File => f instanceof File && f.size > 0);
+    const fileIssues = validateFiles(incoming.map((f) => ({ name: f.name, type: f.type, size: f.size })));
+    if (fileIssues.length) {
+      return { ok: false, code: "UPLOAD", message: fileIssues[0].message, issues: fileIssues };
+    }
+    if (incoming.length > MAX_FILES) {
+      return { ok: false, code: "UPLOAD", message: `You can upload at most ${MAX_FILES} files.` };
+    }
+
     const storedFiles = [];
     for (const file of incoming) {
       const bytes = Buffer.from(await file.arrayBuffer());
@@ -88,16 +88,19 @@ export async function submitInvestigation(formData: FormData): Promise<SubmitRes
     });
 
     const mail = acknowledgementEmail(record.caseNumber);
-    await sendMail({ to: parsed.payload.email, ...mail });
-
-    const notify = process.env.NOTIFY_EMAIL;
-    if (notify) {
-      await sendMail({
-        to: notify,
-        subject: `New enquiry — ${record.caseNumber}`,
-        text: `A new enquiry ${record.caseNumber} is ${record.status}.`,
-        html: `<p>A new enquiry <strong>${record.caseNumber}</strong> is ${record.status}.</p>`,
-      });
+    try {
+      await sendMail({ to: parsed.payload.email, ...mail });
+      const notify = process.env.NOTIFY_EMAIL;
+      if (notify) {
+        await sendMail({
+          to: notify,
+          subject: `New enquiry — ${record.caseNumber}`,
+          text: `A new enquiry ${record.caseNumber} is ${record.status}.`,
+          html: `<p>A new enquiry <strong>${record.caseNumber}</strong> is ${record.status}.</p>`,
+        });
+      }
+    } catch (mailError) {
+      console.error("acknowledgement email failed", mailError);
     }
 
     return { ok: true, caseNumber: record.caseNumber, status: record.status };
@@ -106,4 +109,3 @@ export async function submitInvestigation(formData: FormData): Promise<SubmitRes
     return { ok: false, code: "ERROR", message: "We could not submit the enquiry. Please try again." };
   }
 }
-

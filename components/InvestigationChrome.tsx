@@ -23,7 +23,7 @@ function ChromeInner({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="inv-body">
+    <div className={`inv-body${onForm ? " inv-no-float" : ""}`}>
       <InvestigationHeader />
       <main className="inv-main" id="main">
         {children}

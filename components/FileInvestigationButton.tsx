@@ -16,10 +16,27 @@ export function FileInvestigationButton({ hideOnFormPage = false }: { hideOnForm
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Close menu-style dialog on browser back isn't needed; lock body scroll while open.
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const onToggle = () => {
+      document.body.style.overflow = dialog.open ? "hidden" : "";
+    };
+    dialog.addEventListener("close", onToggle);
+    dialog.addEventListener("cancel", onToggle);
+    return () => {
+      dialog.removeEventListener("close", onToggle);
+      dialog.removeEventListener("cancel", onToggle);
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   if (hideOnFormPage) return null;
 
   const open = () => {
     dialogRef.current?.showModal();
+    document.body.style.overflow = "hidden";
   };
 
   return (

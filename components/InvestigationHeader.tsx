@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCopy } from "@/content/en";
 
 const copy = getCopy();
@@ -20,13 +20,26 @@ export function InvestigationHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header className="inv-header">
       <a className="inv-skip" href="#main">
         {copy.nav.skip}
       </a>
       <div className="inv-header-inner">
-        <Link className="inv-logo" href="/investigations">
+        <Link className="inv-logo" href="/investigations" onClick={() => setOpen(false)}>
           AMIT DUBEY
           <span>Investigations</span>
         </Link>
@@ -37,7 +50,7 @@ export function InvestigationHeader() {
           aria-controls="inv-nav"
           onClick={() => setOpen((v) => !v)}
         >
-          Menu
+          {open ? "Close" : "Menu"}
         </button>
         <nav className="inv-nav" id="inv-nav" data-open={open} aria-label="Investigations">
           {links.map((link) => (
@@ -51,7 +64,9 @@ export function InvestigationHeader() {
             </Link>
           ))}
           {/* Plain <a>: Next.js Link client-nav cannot serve public/*.html */}
-          <a href="/">{copy.nav.brandHome}</a>
+          <a href="/" onClick={() => setOpen(false)}>
+            {copy.nav.brandHome}
+          </a>
         </nav>
       </div>
     </header>
