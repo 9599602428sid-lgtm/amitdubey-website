@@ -34,10 +34,7 @@ const nextConfig: NextConfig = {
     },
   },
   async rewrites() {
-    return [
-      { source: "/", destination: "/home.html" },
-      { source: "/index.html", destination: "/home.html" },
-    ];
+    return [{ source: "/index.html", destination: "/home.html" }];
   },
   async headers() {
     return [
