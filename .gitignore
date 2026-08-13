@@ -10,3 +10,19 @@ desktop.ini
 # Editor folders
 .vscode/
 .idea/
+
+# Next.js
+node_modules/
+.next/
+out/
+tsconfig.tsbuildinfo
+
+# Secrets and case data
+.env
+.env.local
+.env.*.local
+data/cases/
+data/uploads/
+data/mail/
+data/rate-limit.json
+data/sessions/
