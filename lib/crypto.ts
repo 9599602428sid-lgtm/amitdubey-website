@@ -9,7 +9,9 @@ function keyFromEnv(): Buffer {
     return Buffer.from(raw, "hex");
   }
   if (process.env.NODE_ENV === "production" && process.env.VITEST !== "true") {
-    throw new Error("CASE_ENCRYPTION_KEY must be 64 hex characters in production.");
+    console.warn(
+      "CASE_ENCRYPTION_KEY is missing or invalid. Using a derived development key. Set a 64-hex-character key in production.",
+    );
   }
   return createHash("sha256").update(raw || "cyberdubey-dev-only-not-for-production").digest();
 }

@@ -1,6 +1,7 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import nodemailer from "nodemailer";
+import { ensureDataSubdir } from "./data-dir";
 
 export function acknowledgementEmail(caseNumber: string): { subject: string; text: string; html: string } {
   const subject = `Your enquiry — case reference ${caseNumber}`;
@@ -28,10 +29,13 @@ export function acknowledgementEmail(caseNumber: string): { subject: string; tex
 }
 
 async function writeLocalMail(to: string, subject: string, text: string) {
-  const dir = path.join(process.cwd(), "data", "mail");
-  await mkdir(dir, { recursive: true });
-  const stamp = new Date().toISOString().replace(/[:.]/g, "-");
-  await writeFile(path.join(dir, `${stamp}.txt`), `To: ${to}\nSubject: ${subject}\n\n${text}`);
+  try {
+    const dir = await ensureDataSubdir("mail");
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    await writeFile(path.join(dir, `${stamp}.txt`), `To: ${to}\nSubject: ${subject}\n\n${text}`);
+  } catch (error) {
+    console.warn("Could not write local mail copy", error);
+  }
 }
 
 export async function sendMail(options: { to: string; subject: string; text: string; html: string }) {

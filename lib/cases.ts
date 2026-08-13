@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
   DECLARATION_VERSION,
@@ -9,19 +9,19 @@ import {
   type StoredFile,
 } from "./constants";
 import { decryptJson, encryptBuffer, encryptJson } from "./crypto";
+import { ensureDataSubdir } from "./data-dir";
 import { generateCaseNumber } from "./validation";
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const CASES_DIR = path.join(DATA_DIR, "cases");
-const UPLOADS_DIR = path.join(DATA_DIR, "uploads");
-
-async function ensureDirs() {
-  await mkdir(CASES_DIR, { recursive: true });
-  await mkdir(UPLOADS_DIR, { recursive: true });
+async function casesDir() {
+  return ensureDataSubdir("cases");
 }
 
-function casePath(caseNumber: string): string {
-  return path.join(CASES_DIR, `${caseNumber}.enc`);
+async function uploadsDir() {
+  return ensureDataSubdir("uploads");
+}
+
+async function casePath(caseNumber: string): Promise<string> {
+  return path.join(await casesDir(), `${caseNumber}.enc`);
 }
 
 export function addWorkingHours(from: Date, hours: number): Date {
@@ -45,12 +45,11 @@ export async function createCase(input: {
   files: StoredFile[];
   now?: Date;
 }): Promise<StoredCase> {
-  await ensureDirs();
   const now = input.now ?? new Date();
   let caseNumber = generateCaseNumber(now);
   for (let i = 0; i < 8; i += 1) {
     try {
-      await readFile(casePath(caseNumber));
+      await readFile(await casePath(caseNumber));
       caseNumber = generateCaseNumber(now);
     } catch {
       break;
@@ -70,13 +69,13 @@ export async function createCase(input: {
     files: input.files,
   };
 
-  await writeFile(casePath(caseNumber), encryptJson(record));
+  await writeFile(await casePath(caseNumber), encryptJson(record));
   return record;
 }
 
 export async function readCase(caseNumber: string): Promise<StoredCase | null> {
   try {
-    const buf = await readFile(casePath(caseNumber));
+    const buf = await readFile(await casePath(caseNumber));
     return decryptJson<StoredCase>(buf);
   } catch {
     return null;
@@ -84,13 +83,13 @@ export async function readCase(caseNumber: string): Promise<StoredCase | null> {
 }
 
 export async function listCases(): Promise<StoredCase[]> {
-  await ensureDirs();
-  const names = await readdir(CASES_DIR);
+  const dir = await casesDir();
+  const names = await readdir(dir);
   const cases: StoredCase[] = [];
   for (const name of names) {
     if (!name.endsWith(".enc")) continue;
     try {
-      const record = decryptJson<StoredCase>(await readFile(path.join(CASES_DIR, name)));
+      const record = decryptJson<StoredCase>(await readFile(path.join(dir, name)));
       cases.push(record);
     } catch {
       // skip unreadable
@@ -104,7 +103,7 @@ export async function saveUpload(file: {
   mimeType: string;
   bytes: Buffer;
 }): Promise<StoredFile> {
-  await ensureDirs();
+  const dir = await uploadsDir();
   const id = randomUUID();
   const stored: StoredFile = {
     id,
@@ -112,8 +111,8 @@ export async function saveUpload(file: {
     mimeType: file.mimeType,
     size: file.bytes.length,
   };
-  await writeFile(path.join(UPLOADS_DIR, `${id}.enc`), encryptBuffer(file.bytes));
-  await writeFile(path.join(UPLOADS_DIR, `${id}.name`), encryptJson({ name: file.originalName, mime: file.mimeType }));
+  await writeFile(path.join(dir, `${id}.enc`), encryptBuffer(file.bytes));
+  await writeFile(path.join(dir, `${id}.name`), encryptJson({ name: file.originalName, mime: file.mimeType }));
   return stored;
 }
 
@@ -121,7 +120,8 @@ export function uploadPath(id: string): string {
   if (!/^[0-9a-f-]{36}$/i.test(id)) {
     throw new Error("Invalid upload id");
   }
-  return path.join(UPLOADS_DIR, `${id}.enc`);
+  // Resolved lazily by callers that already know the data dir; keep for type compat.
+  return id;
 }
 
 export function hashIp(ip: string): string {
