@@ -22,7 +22,7 @@ export const en = {
     willNot: "What we will not do",
     faq: "FAQ",
     file: "File an Investigation",
-    brandHome: "Main site",
+    brandHome: "Home",
   },
   float: {
     label: "File an Investigation",

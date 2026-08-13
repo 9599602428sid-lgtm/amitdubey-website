@@ -50,7 +50,8 @@ export function InvestigationHeader() {
               {link.label}
             </Link>
           ))}
-          <Link href="/home.html">{copy.nav.brandHome}</Link>
+          {/* Plain <a>: Next.js Link client-nav cannot serve public/*.html */}
+          <a href="/">{copy.nav.brandHome}</a>
         </nav>
       </div>
     </header>
