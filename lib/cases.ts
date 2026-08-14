@@ -8,7 +8,7 @@ import {
   type StoredCase,
   type StoredFile,
 } from "./constants";
-import { decryptJson, decryptJsonFromBase64, encryptBuffer, encryptJson, encryptJsonToBase64, hasValidCaseEncryptionKey } from "./crypto";
+import { decryptBuffer, decryptJson, decryptJsonFromBase64, encryptBuffer, encryptJson, encryptJsonToBase64, hasValidCaseEncryptionKey } from "./crypto";
 import { ensureDataSubdir } from "./data-dir";
 import { getServiceSupabase, isSupabaseConfigured } from "./supabase";
 import { generateCaseNumber } from "./validation";
@@ -130,6 +130,7 @@ function toStoredCase(row: CaseRow): StoredCase {
       originalName: file.original_name,
       mimeType: file.mime_type,
       size: file.size_bytes,
+      storagePath: file.storage_path,
     })),
   };
 }
@@ -310,6 +311,7 @@ async function saveUploadInSupabase(input: {
     originalName,
     mimeType: input.upload.mimeType,
     size: input.upload.bytes.length,
+    storagePath,
   };
 }
 
@@ -367,6 +369,41 @@ async function saveUploadLocal(file: PendingUpload): Promise<StoredFile> {
   await writeFile(path.join(dir, `${id}.enc`), encryptBuffer(file.bytes));
   await writeFile(path.join(dir, `${id}.name`), encryptJson({ name: stored.originalName, mime: file.mimeType }));
   return stored;
+}
+
+export async function readCaseUpload(
+  caseNumber: string,
+  fileId: string,
+): Promise<{ originalName: string; mimeType: string; bytes: Buffer } | null> {
+  if (!/^CD-\d{4}-[0-9A-Z]{4}$/.test(caseNumber) || !/^[0-9a-f-]{36}$/i.test(fileId)) {
+    return null;
+  }
+  const record = await readCase(caseNumber);
+  const file = record?.files.find((item) => item.id === fileId);
+  if (!record || !file) return null;
+
+  if (storeMode() === "supabase") {
+    const storagePath = file.storagePath || `cases/${caseNumber}/${fileId}.enc`;
+    const { data, error } = await getServiceSupabase().storage.from(STORAGE_BUCKET).download(storagePath);
+    if (error || !data) return null;
+    const encrypted = Buffer.from(await data.arrayBuffer());
+    return {
+      originalName: file.originalName,
+      mimeType: file.mimeType,
+      bytes: decryptBuffer(encrypted),
+    };
+  }
+
+  try {
+    const encrypted = await readFile(path.join(await uploadsDir(), `${fileId}.enc`));
+    return {
+      originalName: file.originalName,
+      mimeType: file.mimeType,
+      bytes: decryptBuffer(encrypted),
+    };
+  } catch {
+    return null;
+  }
 }
 
 export async function saveUpload(file: PendingUpload): Promise<StoredFile> {
