@@ -18,7 +18,7 @@ export function isStaffLoginConfigured(): boolean {
 }
 
 export function verifyStaff(username: string, password: string, totp = ""): boolean {
-  const expectedUser = process.env.STAFF_USERNAME || "reviewer";
+  const expectedUser = process.env.STAFF_USERNAME || "admin";
   const expectedPass = process.env.STAFF_PASSWORD;
   if (!expectedPass) return false;
   if (!secretsEqual(username, expectedUser) || !secretsEqual(password, expectedPass)) return false;

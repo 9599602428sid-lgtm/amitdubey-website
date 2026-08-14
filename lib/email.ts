@@ -3,7 +3,8 @@ import path from "node:path";
 import nodemailer from "nodemailer";
 import { ensureDataSubdir } from "./data-dir";
 
-const STAFF_NOTIFY_FALLBACK = "hello.siddhantsuri@gmail.com";
+const STAFF_NOTIFY_FALLBACK = "varun@automationpartners.co.uk";
+const STAFF_LOGIN_URL = "https://cyberdubey.co.uk/internal/login";
 
 export function staffNotifyAddress(): string {
   return (process.env.NOTIFY_EMAIL || STAFF_NOTIFY_FALLBACK).trim();
@@ -33,12 +34,14 @@ export function staffNewCaseEmail(caseNumber: string): { subject: string; text: 
     "",
     `Case number: ${caseNumber}`,
     "",
-    "Sign in at /internal/login to review it. This message does not contain the enquiry details.",
+    `Sign in at ${STAFF_LOGIN_URL} to review the case data and files.`,
+    "This message does not contain the enquiry details.",
   ].join("\n");
   const html = `
     <p>A new File an Investigation enquiry has been received.</p>
     <p>Case number: <strong>${escapeHtml(caseNumber)}</strong></p>
-    <p>Sign in at /internal/login to review it. This message does not contain the enquiry details.</p>
+    <p>Sign in at <a href="${STAFF_LOGIN_URL}">${STAFF_LOGIN_URL}</a> to review the case data and files.</p>
+    <p>This message does not contain the enquiry details.</p>
   `.trim();
   return { subject, text, html };
 }
