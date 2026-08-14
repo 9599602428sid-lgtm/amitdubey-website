@@ -1,15 +1,31 @@
+import { createHash, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { TOTP, Secret } from "otpauth";
 import { COOKIE, MAX_AGE_MS, readSession, signSession } from "./session";
 
 export { readSession, signSession };
 
-export function verifyStaff(username: string, password: string, totp: string): boolean {
+function digest(value: string): Buffer {
+  return createHash("sha256").update(value).digest();
+}
+
+function secretsEqual(left: string, right: string): boolean {
+  return timingSafeEqual(digest(left), digest(right));
+}
+
+export function isStaffLoginConfigured(): boolean {
+  return Boolean(process.env.STAFF_PASSWORD);
+}
+
+export function verifyStaff(username: string, password: string, totp = ""): boolean {
   const expectedUser = process.env.STAFF_USERNAME || "reviewer";
   const expectedPass = process.env.STAFF_PASSWORD;
+  if (!expectedPass) return false;
+  if (!secretsEqual(username, expectedUser) || !secretsEqual(password, expectedPass)) return false;
+
   const totpSecret = process.env.STAFF_TOTP_SECRET;
-  if (!expectedPass || !totpSecret) return false;
-  if (username !== expectedUser || password !== expectedPass) return false;
+  if (!totpSecret) return true;
+
   const token = new TOTP({
     issuer: "CyberDubey",
     label: expectedUser,

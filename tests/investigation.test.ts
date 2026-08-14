@@ -199,3 +199,36 @@ describe("case store refusal path", () => {
     expect(names.filter((n) => n.endsWith(".enc"))).toEqual([]);
   });
 });
+
+describe("staff login", () => {
+  const previous = {
+    user: process.env.STAFF_USERNAME,
+    pass: process.env.STAFF_PASSWORD,
+    totp: process.env.STAFF_TOTP_SECRET,
+  };
+
+  afterEach(() => {
+    process.env.STAFF_USERNAME = previous.user;
+    process.env.STAFF_PASSWORD = previous.pass;
+    process.env.STAFF_TOTP_SECRET = previous.totp;
+  });
+
+  it("accepts the configured username and password when TOTP is not set", async () => {
+    process.env.STAFF_USERNAME = "reviewer";
+    process.env.STAFF_PASSWORD = "correct-horse";
+    delete process.env.STAFF_TOTP_SECRET;
+    const { verifyStaff } = await import("../lib/auth");
+    expect(verifyStaff("reviewer", "correct-horse")).toBe(true);
+    expect(verifyStaff("reviewer", "wrong")).toBe(false);
+    expect(verifyStaff("other", "correct-horse")).toBe(false);
+  });
+
+  it("is disabled when no password is configured", async () => {
+    process.env.STAFF_USERNAME = "reviewer";
+    delete process.env.STAFF_PASSWORD;
+    delete process.env.STAFF_TOTP_SECRET;
+    const { verifyStaff, isStaffLoginConfigured } = await import("../lib/auth");
+    expect(isStaffLoginConfigured()).toBe(false);
+    expect(verifyStaff("reviewer", "anything")).toBe(false);
+  });
+});
