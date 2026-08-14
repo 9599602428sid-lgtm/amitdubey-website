@@ -138,11 +138,14 @@ export function InvestigationForm() {
 
   useEffect(() => {
     if (!hydrated) return;
-    const { d1, d2, d3, d4, ...rest } = draft;
+    const { d1, d2, d3, d4, fullName, email, phoneNumber, ...rest } = draft;
     void d1;
     void d2;
     void d3;
     void d4;
+    void fullName;
+    void email;
+    void phoneNumber;
     localStorage.setItem(DRAFT_KEY, JSON.stringify(rest));
   }, [draft, hydrated]);
 

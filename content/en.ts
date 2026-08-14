@@ -26,7 +26,7 @@ export const en = {
   },
   float: {
     label: "File an Investigation",
-    close: "Close form",
+    close: "Close",
     dialogTitle: "File an Investigation",
   },
   tagline: TAGLINE,

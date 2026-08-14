@@ -10,10 +10,15 @@ export const metadata: Metadata = {
   description: copy.form.pageLead,
 };
 
-export default function FileAnInvestigationPage() {
+export default async function FileAnInvestigationPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ embed?: string }>;
+}) {
+  const embed = (await searchParams).embed === "1";
   return (
     <>
-      <PageIntro title={copy.form.pageTitle} lead={copy.form.pageLead} />
+      {embed ? null : <PageIntro title={copy.form.pageTitle} lead={copy.form.pageLead} />}
       <InvestigationForm />
     </>
   );

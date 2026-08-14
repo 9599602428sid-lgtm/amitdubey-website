@@ -5,7 +5,12 @@ const encoder = new TextEncoder();
 export { COOKIE, MAX_AGE_MS };
 
 function sessionSecret(): string {
-  return process.env.SESSION_SECRET || process.env.CASE_ENCRYPTION_KEY || "dev-session-secret";
+  const secret = process.env.SESSION_SECRET || process.env.CASE_ENCRYPTION_KEY;
+  if (secret) return secret;
+  if (process.env.NODE_ENV === "production" && process.env.VITEST !== "true") {
+    throw new Error("SESSION_SECRET or CASE_ENCRYPTION_KEY is required in production.");
+  }
+  return "dev-session-secret";
 }
 
 function hex(buffer: ArrayBuffer): string {
