@@ -30,14 +30,43 @@
                 <a href="diagnostic.html" class="nav-link">Cyber Diagnostic</a>
                 <a href="consultation.html" class="nav-link mobile-consultation-link">Book a Consultation</a>
             </nav>
+            <div class="nav-end">
             <div class="nav-cta-wrapper">
                 <a href="consultation.html" class="btn btn-primary btn-sm">Book a Consultation</a>
+            </div>
+            <div class="theme-switcher-container" id="theme-switcher-container">
+                <button class="theme-switcher-btn" id="theme-switcher-toggle" aria-label="Change design theme">
+                    <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                    </svg>
+                </button>
+                <div class="theme-menu" id="theme-menu">
+                    <div class="theme-menu-header">Design Templates</div>
+                    <button class="theme-option" data-theme="cyber" id="theme-opt-cyber">
+                        <span class="theme-preview-color cyber"></span>
+                        <span class="theme-label">Quantum Cyber</span>
+                    </button>
+                    <button class="theme-option active" data-theme="executive" id="theme-opt-executive">
+                        <span class="theme-preview-color executive"></span>
+                        <span class="theme-label">Executive Elite</span>
+                    </button>
+                    <button class="theme-option" data-theme="stealth" id="theme-opt-stealth">
+                        <span class="theme-preview-color stealth"></span>
+                        <span class="theme-label">Stealth Amber</span>
+                    </button>
+                    <button class="theme-option" data-theme="brutalist" id="theme-opt-brutalist">
+                        <span class="theme-preview-color brutalist"></span>
+                        <span class="theme-label">Neo-Brutalist</span>
+                    </button>
+                </div>
             </div>
             <button class="mobile-toggle" aria-label="Toggle navigation" id="menu-toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
+            </div>
         </div>
     </header>
 
@@ -242,35 +271,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Theme Switcher Widget -->
-    <div class="theme-switcher-container" id="theme-switcher-container">
-        <button class="theme-switcher-btn" id="theme-switcher-toggle" aria-label="Toggle Theme Menu">
-            <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-            </svg>
-        </button>
-        <div class="theme-menu" id="theme-menu">
-            <div class="theme-menu-header">Design Templates</div>
-            <button class="theme-option" data-theme="cyber" id="theme-opt-cyber">
-                <span class="theme-preview-color cyber"></span>
-                <span class="theme-label">Quantum Cyber</span>
-            </button>
-            <button class="theme-option active" data-theme="executive" id="theme-opt-executive">
-                <span class="theme-preview-color executive"></span>
-                <span class="theme-label">Executive Elite</span>
-            </button>
-            <button class="theme-option" data-theme="stealth" id="theme-opt-stealth">
-                <span class="theme-preview-color stealth"></span>
-                <span class="theme-label">Stealth Amber</span>
-            </button>
-            <button class="theme-option" data-theme="brutalist" id="theme-opt-brutalist">
-                <span class="theme-preview-color brutalist"></span>
-                <span class="theme-label">Neo-Brutalist</span>
-            </button>
-        </div>
-    </div>
 
     <!-- Scripts -->
     <script src="app.js" defer></script>

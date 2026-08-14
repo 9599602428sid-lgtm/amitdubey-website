@@ -25,6 +25,7 @@
   font-size: 16px;
   line-height: 1.65;
   min-height: 100vh;
+  overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -63,6 +64,7 @@
   justify-content: space-between;
   gap: 1rem;
   position: relative;
+  flex-wrap: nowrap;
 }
 .inv-logo {
   color: #f7f5f0;
@@ -70,6 +72,7 @@
   font-weight: 700;
   letter-spacing: 0.02em;
   font-size: 0.95rem;
+  flex-shrink: 0;
 }
 .inv-logo span {
   display: block;
@@ -117,8 +120,8 @@
   padding: 2.5rem 1.25rem 7rem;
 }
 .inv-embed .inv-main {
-  padding: 1rem 1rem 2rem;
-  max-width: 760px;
+  padding: 0.85rem 1rem 1.5rem;
+  max-width: 100%;
 }
 
 .inv-kicker {
@@ -135,6 +138,7 @@
   line-height: 1.2;
   margin: 0 0 0.75rem;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 .inv-lead {
   font-size: 1.15rem;
@@ -280,31 +284,70 @@
 .inv-dialog {
   border: 0;
   padding: 0;
-  width: min(920px, 96vw);
-  height: min(90vh, 900px);
-  max-height: 90vh;
+  width: min(920px, calc(100vw - 2rem));
+  height: min(88dvh, 880px);
+  max-width: calc(100vw - 2rem);
+  max-height: 88dvh;
   background: var(--inv-paper);
   position: fixed;
+  inset: 0;
+  margin: auto;
   overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(15, 28, 46, 0.35);
+}
+.inv-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.inv-dialog-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  padding: 0.65rem 0.85rem;
+  background: var(--inv-navy);
+  color: #f7f5f0;
+}
+.inv-dialog-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 .inv-dialog-frame {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   border: 0;
   display: block;
-  padding-top: 3.25rem;
-  box-sizing: border-box;
   background: var(--inv-paper);
 }
 .inv-dialog-close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  z-index: 2;
+  position: static;
   min-height: 44px;
+  color: #f7f5f0;
+  border-color: rgba(247, 245, 240, 0.35);
 }
 
 .inv-form { max-width: 720px; }
+.inv-form fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 1rem;
+}
+.inv-form legend,
+.inv-form .inv-callout,
+.inv-form .inv-stop,
+.inv-form .inv-check,
+.inv-form .inv-field:has(textarea),
+.inv-form .inv-field:has(input[type="file"]),
+.inv-form .inv-field:has(.inv-phone) {
+  grid-column: 1 / -1;
+}
 .inv-progress {
   display: flex;
   gap: 0.4rem;
@@ -325,7 +368,7 @@
   font-weight: 700;
 }
 
-.inv-field { margin: 0 0 1.1rem; }
+.inv-field { margin: 0 0 1.1rem; min-width: 0; }
 .inv-field label,
 .inv-legend {
   display: block;
@@ -444,28 +487,9 @@
   }
   .inv-nav[data-open="true"] { display: flex; }
   .inv-progress {
-    gap: 0.25rem;
-  }
-  .inv-progress li {
-    font-size: 0.68rem;
-    line-height: 1.25;
-  }
-}
-
-@media (max-width: 640px) {
-  .inv-grid-4, .inv-grid-2, .inv-steps, .inv-phone { grid-template-columns: 1fr; }
-  .inv-main {
-    padding: 1.5rem 1rem 7rem;
-  }
-  .inv-h1 {
-    font-size: clamp(1.55rem, 7vw, 2.1rem);
-  }
-  .inv-lead {
-    font-size: 1.05rem;
-  }
-  .inv-progress {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.25rem;
   }
   .inv-progress li {
     font-size: 0;
@@ -474,6 +498,22 @@
     content: attr(data-step);
     font-size: 0.8rem;
     font-weight: 700;
+  }
+}
+
+@media (max-width: 640px) {
+  .inv-grid-4, .inv-grid-2, .inv-steps, .inv-phone, .inv-form fieldset { grid-template-columns: 1fr; }
+  .inv-main {
+    padding: 1.5rem 1rem 7rem;
+  }
+  .inv-header-inner {
+    padding: 0.75rem 1rem;
+  }
+  .inv-h1 {
+    font-size: clamp(1.55rem, 7vw, 2.1rem);
+  }
+  .inv-lead {
+    font-size: 1.05rem;
   }
   .inv-progress li[data-active="true"]::before {
     color: var(--inv-ink);
@@ -492,14 +532,20 @@
   .inv-body.inv-no-float .inv-main,
   .inv-body.inv-no-float .inv-footer,
   .inv-embed .inv-main {
-    padding-bottom: 2rem;
+    padding-bottom: 1.25rem;
   }
   .inv-dialog {
-    width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
     margin: 0;
     max-width: 100vw;
+    border-radius: 0;
+    inset: 0;
+  }
+  .inv-dialog-title {
+    font-size: 0.88rem;
   }
   .inv-case {
     font-size: 1.35rem;
@@ -508,6 +554,10 @@
   .inv-actions .inv-btn,
   .inv-actions .inv-btn-secondary {
     width: 100%;
+  }
+  .inv-card h2,
+  .inv-card h3 {
+    overflow-wrap: anywhere;
   }
 }
 

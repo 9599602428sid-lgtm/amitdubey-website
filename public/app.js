@@ -679,9 +679,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (themeMenu && !themeMenu.contains(e.target) && e.target !== themeToggle) {
-                themeMenu.classList.remove('active');
-            }
+            const target = e.target;
+            if (!(target instanceof Node)) return;
+            if (themeMenu.contains(target) || themeToggle.contains(target)) return;
+            themeMenu.classList.remove('active');
         });
     }
 
