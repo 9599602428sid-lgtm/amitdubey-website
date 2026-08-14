@@ -1,6 +1,6 @@
 "use server";
 
-import { sendMail } from "@/lib/email";
+import { sendMail, staffNotifyAddress } from "@/lib/email";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { headers } from "next/headers";
 
@@ -21,7 +21,7 @@ export async function submitSubjectEnquiry(formData: FormData): Promise<{ ok: bo
     return { ok: false, message: "Please complete your name, email, and a short description of your concern." };
   }
 
-  const notify = process.env.NOTIFY_EMAIL || process.env.CONTACT_EMAIL || "investigations@cyberdubey.co.uk";
+  const notify = staffNotifyAddress();
   await sendMail({
     to: notify,
     subject: "Subject enquiry",

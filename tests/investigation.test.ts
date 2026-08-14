@@ -242,3 +242,29 @@ describe("staff date display", () => {
     expect(text).toMatch(/8:31\s?pm/i);
   });
 });
+
+describe("investigation emails", () => {
+  it("acknowledges only the case number and does not include enquiry details", async () => {
+    const { acknowledgementEmail } = await import("../lib/email");
+    const mail = acknowledgementEmail("CD-2608-LR1R");
+    expect(mail.subject).toContain("CD-2608-LR1R");
+    expect(mail.text).toContain("CD-2608-LR1R");
+    expect(mail.text).toMatch(/submitted/i);
+    expect(mail.text.toLowerCase()).not.toContain("jordan");
+    expect(mail.text.toLowerCase()).not.toContain("establish");
+    expect(mail.html).not.toContain("payload");
+  });
+
+  it("notifies staff of a new case number only", async () => {
+    const { staffNewCaseEmail, staffNotifyAddress } = await import("../lib/email");
+    const previous = process.env.NOTIFY_EMAIL;
+    delete process.env.NOTIFY_EMAIL;
+    expect(staffNotifyAddress()).toBe("hello.siddhantsuri@gmail.com");
+    const mail = staffNewCaseEmail("CD-2608-LR1R");
+    expect(mail.subject).toContain("CD-2608-LR1R");
+    expect(mail.text).toContain("CD-2608-LR1R");
+    expect(mail.text.toLowerCase()).not.toContain("jordan@example.com");
+    expect(mail.text.toLowerCase()).not.toContain("mumbai");
+    process.env.NOTIFY_EMAIL = previous;
+  });
+});

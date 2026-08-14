@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 import { createCase, hashSubmitterIp, type PendingUpload } from "@/lib/cases";
-import { acknowledgementEmail, sendMail } from "@/lib/email";
+import { acknowledgementEmail, sendMail, staffNewCaseEmail, staffNotifyAddress } from "@/lib/email";
 import { detectAllowedFile, mimeFor, virusScan } from "@/lib/files";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { MAX_FILES } from "@/lib/constants";
@@ -86,20 +86,17 @@ export async function submitInvestigation(formData: FormData): Promise<SubmitRes
       submitterIpHash: hashSubmitterIp(ip),
     });
 
-    const mail = acknowledgementEmail(record.caseNumber);
+    const clientMail = acknowledgementEmail(record.caseNumber);
+    const staffMail = staffNewCaseEmail(record.caseNumber);
     try {
-      await sendMail({ to: parsed.payload.email, ...mail });
-      const notify = process.env.NOTIFY_EMAIL;
-      if (notify) {
-        await sendMail({
-          to: notify,
-          subject: `New enquiry — ${record.caseNumber}`,
-          text: `A new enquiry ${record.caseNumber} is ${record.status}.`,
-          html: `<p>A new enquiry <strong>${record.caseNumber}</strong> is ${record.status}.</p>`,
-        });
-      }
+      await sendMail({ to: parsed.payload.email, ...clientMail });
     } catch (mailError) {
       console.error("acknowledgement email failed", mailError);
+    }
+    try {
+      await sendMail({ to: staffNotifyAddress(), ...staffMail });
+    } catch (mailError) {
+      console.error("staff notification email failed", mailError);
     }
 
     return { ok: true, caseNumber: record.caseNumber, status: record.status };
