@@ -248,10 +248,11 @@ describe("investigation emails", () => {
     const { staffNewCaseEmail, staffNotifyAddress } = await import("../lib/email");
     const previous = process.env.NOTIFY_EMAIL;
     delete process.env.NOTIFY_EMAIL;
-    expect(staffNotifyAddress()).toBe("hello.siddhantsuri@gmail.com");
+    expect(staffNotifyAddress()).toBe("varun@automationpartners.co.uk");
     const mail = staffNewCaseEmail("CD-2608-LR1R");
     expect(mail.subject).toContain("CD-2608-LR1R");
     expect(mail.text).toContain("CD-2608-LR1R");
+    expect(mail.text).toContain("https://cyberdubey.co.uk/internal/login");
     expect(mail.text.toLowerCase()).not.toContain("jordan@example.com");
     expect(mail.text.toLowerCase()).not.toContain("mumbai");
     process.env.NOTIFY_EMAIL = previous;
