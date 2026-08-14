@@ -9,6 +9,8 @@ import { generateCaseNumber, isIndiaSubject, validateSubmission } from "../lib/v
 
 process.env.CASE_ENCRYPTION_KEY = "a".repeat(64);
 process.env.VITEST = "true";
+delete process.env.SUPABASE_URL;
+delete process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 function validInput(overrides: Record<string, unknown> = {}): Record<string, unknown> {
   return {
@@ -114,6 +116,55 @@ describe("uploads", () => {
     expect(detectAllowedFile("note.pdf", pdf)).toBe("pdf");
     const exe = Buffer.from([0x4d, 0x5a, 0x90, 0x00]);
     expect(detectAllowedFile("note.pdf", exe)).toBeNull();
+  });
+});
+
+describe("storage payload", () => {
+  it("strips the honeypot before sealing", async () => {
+    const { payloadForStorage } = await import("../lib/cases");
+    const parsed = validateSubmission(validInput({ website: "" }));
+    expect(parsed.ok).toBe(true);
+    if (!parsed.ok) return;
+    const stored = payloadForStorage({ ...parsed.payload, honeypot: "http://spam.test" });
+    expect("honeypot" in stored).toBe(false);
+    expect(JSON.stringify(stored)).not.toContain("spam.test");
+  });
+
+  it("hashes submitter IPs to full SHA-256 hex", async () => {
+    const { hashSubmitterIp } = await import("../lib/cases");
+    const hash = hashSubmitterIp("203.0.113.10");
+    expect(hash).toMatch(/^[0-9a-f]{64}$/);
+    expect(hash).not.toContain("203.0.113.10");
+  });
+
+  it("refuses to persist a case when the subject is not in India", async () => {
+    const { createCase } = await import("../lib/cases");
+    const parsed = validateSubmission(validInput());
+    expect(parsed.ok).toBe(true);
+    if (!parsed.ok) return;
+    await expect(
+      createCase({
+        payload: { ...parsed.payload, subjectLocation: "OUTSIDE" },
+        seniorReviewRequired: false,
+        uploads: [],
+      }),
+    ).rejects.toThrow(/India/);
+  });
+});
+
+describe("supabase admin client", () => {
+  it("rejects publishable and anon keys", async () => {
+    const { getServiceSupabase } = await import("../lib/supabase");
+    const previousUrl = process.env.SUPABASE_URL;
+    const previousKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    process.env.SUPABASE_URL = "https://example.supabase.co";
+    process.env.SUPABASE_SERVICE_ROLE_KEY = "sb_publishable_test";
+    try {
+      expect(() => getServiceSupabase()).toThrow(/service_role/);
+    } finally {
+      process.env.SUPABASE_SERVICE_ROLE_KEY = previousKey;
+      process.env.SUPABASE_URL = previousUrl;
+    }
   });
 });
 

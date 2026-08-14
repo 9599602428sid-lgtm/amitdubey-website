@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { createCase, saveUpload } from "@/lib/cases";
+import { createCase, hashSubmitterIp, type PendingUpload } from "@/lib/cases";
 import { acknowledgementEmail, sendMail } from "@/lib/email";
 import { detectAllowedFile, mimeFor, virusScan } from "@/lib/files";
 import { checkRateLimit } from "@/lib/rate-limit";
@@ -57,7 +57,7 @@ export async function submitInvestigation(formData: FormData): Promise<SubmitRes
       return { ok: false, code: "UPLOAD", message: `You can upload at most ${MAX_FILES} files.` };
     }
 
-    const storedFiles = [];
+    const uploads: PendingUpload[] = [];
     for (const file of incoming) {
       const bytes = Buffer.from(await file.arrayBuffer());
       const kind = detectAllowedFile(file.name, bytes);
@@ -72,19 +72,18 @@ export async function submitInvestigation(formData: FormData): Promise<SubmitRes
       if (!scan.clean) {
         return { ok: false, code: "UPLOAD", message: scan.reason || "A file failed the security check." };
       }
-      storedFiles.push(
-        await saveUpload({
-          originalName: file.name,
-          mimeType: mimeFor(kind),
-          bytes,
-        }),
-      );
+      uploads.push({
+        originalName: file.name,
+        mimeType: mimeFor(kind),
+        bytes,
+      });
     }
 
     const record = await createCase({
       payload: parsed.payload,
       seniorReviewRequired: parsed.seniorReviewRequired,
-      files: storedFiles,
+      uploads,
+      submitterIpHash: hashSubmitterIp(ip),
     });
 
     const mail = acknowledgementEmail(record.caseNumber);

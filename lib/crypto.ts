@@ -40,3 +40,15 @@ export function encryptJson(value: unknown): Buffer {
 export function decryptJson<T>(payload: Buffer): T {
   return JSON.parse(decryptBuffer(payload).toString("utf8")) as T;
 }
+
+export function hasValidCaseEncryptionKey(): boolean {
+  return /^[0-9a-fA-F]{64}$/.test(process.env.CASE_ENCRYPTION_KEY || "");
+}
+
+export function encryptJsonToBase64(value: unknown): string {
+  return encryptJson(value).toString("base64");
+}
+
+export function decryptJsonFromBase64<T>(value: string): T {
+  return decryptJson<T>(Buffer.from(value, "base64"));
+}
