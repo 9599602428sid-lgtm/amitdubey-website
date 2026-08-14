@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 import { createCase, hashSubmitterIp, type PendingUpload } from "@/lib/cases";
-import { acknowledgementEmail, sendMail, staffNewCaseEmail, staffNotifyAddress } from "@/lib/email";
+import { sendMail, staffNewCaseEmail, staffNotifyAddress } from "@/lib/email";
 import { detectAllowedFile, mimeFor, virusScan } from "@/lib/files";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { MAX_FILES } from "@/lib/constants";
@@ -86,15 +86,8 @@ export async function submitInvestigation(formData: FormData): Promise<SubmitRes
       submitterIpHash: hashSubmitterIp(ip),
     });
 
-    const clientMail = acknowledgementEmail(record.caseNumber);
-    const staffMail = staffNewCaseEmail(record.caseNumber);
     try {
-      await sendMail({ to: parsed.payload.email, ...clientMail });
-    } catch (mailError) {
-      console.error("acknowledgement email failed", mailError);
-    }
-    try {
-      await sendMail({ to: staffNotifyAddress(), ...staffMail });
+      await sendMail({ to: staffNotifyAddress(), ...staffNewCaseEmail(record.caseNumber) });
     } catch (mailError) {
       console.error("staff notification email failed", mailError);
     }
