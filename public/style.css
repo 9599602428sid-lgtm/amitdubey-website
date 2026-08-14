@@ -34,6 +34,11 @@
     scroll-behavior: smooth;
 }
 
+/* Global reset zeros dialog margin; native dialogs need auto margins (or explicit left/top) to sit in the centre. */
+dialog {
+    margin: auto;
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-primary);

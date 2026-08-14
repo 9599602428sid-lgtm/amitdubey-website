@@ -280,25 +280,34 @@
 }
 .inv-float:hover { background: var(--inv-navy-2); }
 
-.inv-dialog::backdrop { background: rgba(15, 28, 46, 0.55); }
+.inv-dialog::backdrop { background: rgba(15, 28, 46, 0.58); }
 .inv-dialog {
   border: 0;
   padding: 0;
-  width: min(920px, calc(100vw - 2rem));
-  height: min(88dvh, 880px);
-  max-width: calc(100vw - 2rem);
-  max-height: 88dvh;
-  background: var(--inv-paper);
+  width: min(880px, calc(100vw - 2.5rem));
+  height: min(800px, calc(100dvh - 2.5rem));
+  max-width: calc(100vw - 2.5rem);
+  max-height: calc(100dvh - 2.5rem);
+  background: transparent;
   position: fixed;
-  inset: 0;
-  margin: auto;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin: 0;
+  transform: translate(-50%, -50%);
   overflow: hidden;
   border-radius: 12px;
-  box-shadow: 0 24px 64px rgba(15, 28, 46, 0.35);
+  box-shadow: 0 24px 64px rgba(15, 28, 46, 0.4);
 }
-.inv-dialog[open] {
+.inv-dialog-window {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--inv-paper);
+  overflow: hidden;
+  border-radius: 12px;
 }
 .inv-dialog-bar {
   display: flex;
@@ -319,6 +328,7 @@
   width: 100%;
   flex: 1;
   min-height: 0;
+  height: auto;
   border: 0;
   display: block;
   background: var(--inv-paper);
@@ -535,14 +545,14 @@
     padding-bottom: 1.25rem;
   }
   .inv-dialog {
-    width: 100%;
-    height: 100%;
-    height: 100dvh;
-    max-height: 100dvh;
+    width: calc(100vw - 1.5rem);
+    height: calc(100dvh - 1.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    max-width: calc(100vw - 1.5rem);
+    max-height: calc(100dvh - 1.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    top: calc(50% + env(safe-area-inset-top, 0px) / 2 - env(safe-area-inset-bottom, 0px) / 2);
+    left: 50%;
     margin: 0;
-    max-width: 100vw;
-    border-radius: 0;
-    inset: 0;
+    border-radius: 10px;
   }
   .inv-dialog-title {
     font-size: 0.88rem;
