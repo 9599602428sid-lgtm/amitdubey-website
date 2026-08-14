@@ -232,3 +232,13 @@ describe("staff login", () => {
     expect(verifyStaff("reviewer", "anything")).toBe(false);
   });
 });
+
+describe("staff date display", () => {
+  it("formats received times in India Standard Time instead of raw ISO", async () => {
+    const { formatStaffDateTime } = await import("../lib/datetime");
+    const text = formatStaffDateTime("2026-08-14T15:01:13.795+00:00");
+    expect(text).not.toContain("T15:01:13");
+    expect(text).toMatch(/14 Aug 2026/);
+    expect(text).toMatch(/8:31\s?pm/i);
+  });
+});

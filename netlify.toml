@@ -12,3 +12,10 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+[[headers]]
+  for = "/internal/*"
+  [headers.values]
+    Cache-Control = "private, no-store, max-age=0, must-revalidate"
+    Pragma = "no-cache"
+    X-Robots-Tag = "noindex, nofollow"
