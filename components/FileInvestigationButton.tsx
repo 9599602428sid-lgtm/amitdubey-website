@@ -59,21 +59,23 @@ export function FileInvestigationButton({ hideOnFormPage = false }: { hideOnForm
           if (event.target === dialogRef.current) close();
         }}
       >
-        <div className="inv-dialog-bar">
-          <p id="inv-dialog-title" className="inv-dialog-title">
-            {copy.float.dialogTitle}
-          </p>
-          <button type="button" className="inv-btn-secondary inv-dialog-close" onClick={close}>
-            {copy.float.close}
-          </button>
+        <div className="inv-dialog-window">
+          <div className="inv-dialog-bar">
+            <p id="inv-dialog-title" className="inv-dialog-title">
+              {copy.float.dialogTitle}
+            </p>
+            <button type="button" className="inv-btn-secondary inv-dialog-close" onClick={close}>
+              {copy.float.close}
+            </button>
+          </div>
+          <iframe
+            ref={frameRef}
+            className="inv-dialog-frame"
+            title={copy.float.dialogTitle}
+            src="about:blank"
+            referrerPolicy="same-origin"
+          />
         </div>
-        <iframe
-          ref={frameRef}
-          className="inv-dialog-frame"
-          title={copy.float.dialogTitle}
-          src="about:blank"
-          referrerPolicy="same-origin"
-        />
       </dialog>
     </>
   );
