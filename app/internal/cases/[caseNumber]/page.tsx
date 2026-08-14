@@ -2,25 +2,17 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getStaffUser } from "@/lib/auth";
 import { readCase } from "@/lib/cases";
+import { formatStaffDateTime } from "@/lib/datetime";
 import {
   CATEGORIES,
   DECLARATIONS,
   PREFERRED_CONTACT,
   URGENCY_OPTIONS,
-  WORKING_TIMEZONE,
 } from "@/lib/constants";
 import { COUNTRIES } from "@/lib/countries";
 import { getCopy } from "@/content/en";
 
 const copy = getCopy();
-
-function formatWhen(iso: string): string {
-  return new Intl.DateTimeFormat("en-GB", {
-    dateStyle: "medium",
-    timeStyle: "short",
-    timeZone: WORKING_TIMEZONE,
-  }).format(new Date(iso));
-}
 
 function yesNo(value: string): string {
   if (value === "yes") return copy.form.yes;
@@ -71,8 +63,7 @@ export default async function StaffCaseDetailPage({
         <p className="inv-kicker">{record.status}</p>
         <h1 className="inv-h1">{record.caseNumber}</h1>
         <p>
-          Received {formatWhen(record.createdAt)} ({WORKING_TIMEZONE}). Review due by{" "}
-          {formatWhen(record.reviewDueBy)}.
+          Received {formatStaffDateTime(record.createdAt)}. Review due by {formatStaffDateTime(record.reviewDueBy)}.
         </p>
         {record.seniorReviewRequired ? <p className="inv-callout">Flagged for senior review.</p> : null}
 
@@ -159,7 +150,7 @@ export default async function StaffCaseDetailPage({
         <section className="inv-review">
           <h2 className="inv-legend">{copy.form.step4Title}</h2>
           <p className="inv-hint">
-            Declaration {record.declarationVersion}, agreed {formatWhen(record.declarationAgreedAt)}.
+            Declaration {record.declarationVersion}, agreed {formatStaffDateTime(record.declarationAgreedAt)}.
           </p>
           <ul>
             {DECLARATIONS.map((item) => (

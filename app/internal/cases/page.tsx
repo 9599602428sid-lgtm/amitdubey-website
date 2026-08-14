@@ -2,7 +2,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { staffLogout } from "@/app/actions/staff-auth";
 import { getStaffUser } from "@/lib/auth";
+import { formatStaffDateTime } from "@/lib/datetime";
 import { listCases } from "@/lib/cases";
+
+export const dynamic = "force-dynamic";
 
 export default async function StaffCasesPage() {
   const user = await getStaffUser();
@@ -39,7 +42,7 @@ export default async function StaffCasesPage() {
                     <Link href={`/internal/cases/${item.caseNumber}`}>{item.caseNumber}</Link>
                   </td>
                   <td>{item.status}</td>
-                  <td>{item.createdAt}</td>
+                  <td>{formatStaffDateTime(item.createdAt)}</td>
                   <td>{item.seniorReviewRequired ? "Yes" : "No"}</td>
                 </tr>
               ))}
