@@ -3,29 +3,52 @@ import path from "node:path";
 import nodemailer from "nodemailer";
 import { ensureDataSubdir } from "./data-dir";
 
+const STAFF_NOTIFY_FALLBACK = "hello.siddhantsuri@gmail.com";
+
+export function staffNotifyAddress(): string {
+  return (process.env.NOTIFY_EMAIL || STAFF_NOTIFY_FALLBACK).trim();
+}
+
 export function acknowledgementEmail(caseNumber: string): { subject: string; text: string; html: string } {
-  const subject = `Your enquiry — case reference ${caseNumber}`;
+  const subject = `Your case has been submitted — ${caseNumber}`;
   const text = [
-    `Thank you for contacting us. Your case reference is ${caseNumber}. Please quote it in any correspondence.`,
+    "Your investigation enquiry has been submitted.",
     "",
-    "What happens next. A senior reviewer will read your case and respond within 24 to 48 working hours, either with questions or with a written scope and a fixed fee.",
+    `Your case number is ${caseNumber}.`,
     "",
-    "What this email is not. This is an acknowledgement, not an acceptance. We have not agreed to act and no fee is payable.",
-    "",
-    "If it is urgent. If money is at risk right now, contact your bank and report to the police or your national fraud line now. Do not wait for us.",
-    "",
-    "Your enquiry is held securely and is not shared outside our review team.",
+    "Please quote this case number if you contact us. We will be in touch.",
   ].join("\n");
-
   const html = `
-    <p>Thank you for contacting us. Your case reference is <strong>${caseNumber}</strong>. Please quote it in any correspondence.</p>
-    <p><strong>What happens next.</strong> A senior reviewer will read your case and respond within 24 to 48 working hours, either with questions or with a written scope and a fixed fee.</p>
-    <p><strong>What this email is not.</strong> This is an acknowledgement, not an acceptance. We have not agreed to act and no fee is payable.</p>
-    <p><strong>If it is urgent.</strong> If money is at risk right now, contact your bank and report to the police or your national fraud line now. Do not wait for us.</p>
-    <p>Your enquiry is held securely and is not shared outside our review team.</p>
+    <p>Your investigation enquiry has been submitted.</p>
+    <p>Your case number is <strong>${escapeHtml(caseNumber)}</strong>.</p>
+    <p>Please quote this case number if you contact us. We will be in touch.</p>
   `.trim();
-
   return { subject, text, html };
+}
+
+export function staffNewCaseEmail(caseNumber: string): { subject: string; text: string; html: string } {
+  const subject = `New case received — ${caseNumber}`;
+  const text = [
+    "A new File an Investigation enquiry has been received.",
+    "",
+    `Case number: ${caseNumber}`,
+    "",
+    "Sign in at /internal/login to review it. This message does not contain the enquiry details.",
+  ].join("\n");
+  const html = `
+    <p>A new File an Investigation enquiry has been received.</p>
+    <p>Case number: <strong>${escapeHtml(caseNumber)}</strong></p>
+    <p>Sign in at /internal/login to review it. This message does not contain the enquiry details.</p>
+  `.trim();
+  return { subject, text, html };
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 async function writeLocalMail(to: string, subject: string, text: string) {
@@ -55,7 +78,7 @@ export async function sendMail(options: { to: string; subject: string; text: str
   });
 
   await transporter.sendMail({
-    from: process.env.EMAIL_FROM || "investigations@cyberdubey.co.uk",
+    from: process.env.EMAIL_FROM || "Investigations <investigations@cyberdubey.co.uk>",
     to: options.to,
     subject: options.subject,
     text: options.text,
