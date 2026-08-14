@@ -19,6 +19,7 @@ export default async function StaffCasesPage() {
             Sign out
           </button>
         </form>
+        <p>Click a case number to open the full form answers and any uploaded files.</p>
         {cases.length === 0 ? (
           <p>No cases yet.</p>
         ) : (
